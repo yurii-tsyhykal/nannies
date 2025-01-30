@@ -1,0 +1,14 @@
+/* @media screen and (min-width: 1440px) {
+  .layoutWrapper {
+    background-color: #fbfbfb;
+    width: 100%;
+    max-width: 1440px;
+  }
+} */
+
+.layoutWrapper {
+  background-color: #fbfbfb;
+  width: 100%;
+  max-width: 1440px;
+  padding: 32px;
+}
