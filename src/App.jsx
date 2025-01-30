@@ -9,16 +9,16 @@ const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage'));
 
 function App() {
   return (
-    <Layout>
-      <Suspense fallback={<div>...Loading</div>}>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/nannies" element={<NanniesPage />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+    <Suspense fallback={<div>...Loading</div>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<HomePage />} />
+          <Route path="nannies" element={<NanniesPage />} />
+          <Route path="favorites" element={<FavoritesPage />} />
           <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </Layout>
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 

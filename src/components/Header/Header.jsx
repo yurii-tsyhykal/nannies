@@ -3,11 +3,17 @@ import css from './Header.module.css';
 
 const Header = () => {
   return (
-    <header className="">
-      <Link to="/">Nanny.Services</Link>
+    <header className={css.headerHome}>
+      <Link to="/" className={css.logo}>Nanny.Services</Link>
       <nav>
-        <NavLink to="/">Home</NavLink>
-        <NavLink to="nannies">Nannies</NavLink>
+        <ul className={css.navList}>
+          <li>
+            <NavLink to="/">Home</NavLink>
+          </li>
+          <li>
+            <NavLink to="nannies">Nannies</NavLink>
+          </li>
+        </ul>
       </nav>
     </header>
   );

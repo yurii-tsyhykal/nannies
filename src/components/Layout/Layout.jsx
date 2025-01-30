@@ -1,13 +1,19 @@
-import { useLocation } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
 import css from './Layout.module.css';
+import clsx from 'clsx';
 
-const Layout = ({ children }) => {
+const Layout = () => {
+  const { pathname } = useLocation();
+  const isHomePage = pathname === '/';
+  console.log(isHomePage);
+
   return (
-    <div>
+    <div className={clsx(css.layoutWrapper)}>
       <Header />
       <main>
-        <section>main {children}</section>
+          main
+          <Outlet />
       </main>
     </div>
   );

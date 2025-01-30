@@ -1,0 +1,24 @@
+.headerHome {
+  display: flex;
+  padding: 20px 96px;
+  align-items: center;
+  justify-content: space-between;
+  .logo {
+    font-size: 24px;
+
+    line-height: 1.17;
+    letter-spacing: -0.02em;
+    /* color: #fbfbfb; */
+  }
+
+  nav {
+    .navList {
+      display: flex;
+      column-gap: 40px;
+      li > a {
+        line-height: 1.25;
+        /* color: #fbfbfb; */
+      }
+    }
+  }
+}
