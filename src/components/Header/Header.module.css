@@ -1,14 +1,19 @@
 .headerHome {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  right: 32px;
   display: flex;
   padding: 20px 96px;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid rgba(251, 251, 251, 0.4);
   .logo {
     font-size: 24px;
 
     line-height: 1.17;
     letter-spacing: -0.02em;
-    /* color: #fbfbfb; */
+    color: var(--main);
   }
 
   nav {
@@ -17,8 +22,18 @@
       column-gap: 40px;
       li > a {
         line-height: 1.25;
-        /* color: #fbfbfb; */
+        color: var(--main);
       }
     }
   }
+}
+
+.header {
+  background-color: var(--background);
+}
+
+.navWrapper {
+  display: flex;
+  column-gap: 92px;
+  align-items: center;
 }

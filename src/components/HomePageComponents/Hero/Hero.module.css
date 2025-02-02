@@ -10,7 +10,53 @@
   background-repeat: no-repeat;
   background-size: 50% 100%;
   background-position: right center;
-  /* fix hard*/
   min-height: 736px;
-  /*  fix hard*/
+
+  .titleWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    padding-left: 96px;
+    max-width: 517px;
+    height: 100vh;
+    .title {
+      font-size: 70px;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      margin-bottom: 28px;
+    }
+    .subtitle {
+      font-weight: 400;
+      font-size: 28px;
+
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 64px;
+    }
+    .getStartedLink {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(251, 251, 251, 0.4);
+      border-radius: 30px;
+      padding: 18px 50px;
+      font-family: var(--font-family);
+      font-size: 20px;
+      line-height: 1.2;
+      color: currentColor;
+      .linkText {
+        margin-right: 18px;
+      }
+
+      .arrow {
+        transform: rotate(-55deg);
+        transition: transform var(--transition);
+      }
+      &:hover .arrow,
+      &:focus .arrow {
+        transform: rotate(0deg);
+      }
+    }
+  }
 }
