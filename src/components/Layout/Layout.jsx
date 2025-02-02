@@ -6,14 +6,11 @@ import clsx from 'clsx';
 const Layout = () => {
   const { pathname } = useLocation();
   const isHomePage = pathname === '/';
-  console.log(isHomePage);
-
   return (
     <div className={clsx(css.layoutWrapper)}>
-      <Header />
+      <Header type={isHomePage} />
       <main>
-          main
-          <Outlet />
+        <Outlet />
       </main>
     </div>
   );
