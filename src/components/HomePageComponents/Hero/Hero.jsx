@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import css from './Hero.module.css';
 import { BsArrowRight } from 'react-icons/bs';
+import { FaCheck } from 'react-icons/fa';
 
 const Hero = () => {
   return (
@@ -11,7 +12,7 @@ const Hero = () => {
           <p className={css.subtitle}>
             Find Babysitters Online for All Occasions
           </p>
-          <NavLink className={css.getStartedLink}>
+          <NavLink className={css.getStartedLink} to={'/nannies'}>
             <span className={css.linkText}>Get started</span>
             <BsArrowRight
               className={css.arrow}
@@ -20,6 +21,13 @@ const Hero = () => {
               fill="#fbfbfb"
             />
           </NavLink>
+        </div>
+        <div className={css.countWrapper}>
+          <span className={css.countCheck}>
+            <FaCheck className={css.checkIcon} />
+          </span>
+          <p className={css.countDesc}>Experienced nannies</p>
+          <span className={css.count}>15,000</span>
         </div>
       </div>
     </>

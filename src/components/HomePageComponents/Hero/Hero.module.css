@@ -1,4 +1,5 @@
 .heroContainer {
+  position: relative;
   border-radius: 30px;
   width: 100%;
   background-color: #0957c3;
@@ -10,7 +11,7 @@
   background-repeat: no-repeat;
   background-size: 50% 100%;
   background-position: right center;
-  min-height: 736px;
+  height: 736px;
 
   .titleWrapper {
     display: flex;
@@ -19,8 +20,9 @@
     align-items: start;
     padding-left: 96px;
     max-width: 517px;
-    height: 100vh;
+    height: inherit;
     .title {
+      font-weight: 500;
       font-size: 70px;
       line-height: 1;
       letter-spacing: -0.03em;
@@ -42,6 +44,7 @@
       border-radius: 30px;
       padding: 18px 50px;
       font-family: var(--font-family);
+      font-weight: 500;
       font-size: 20px;
       line-height: 1.2;
       color: currentColor;
@@ -57,6 +60,50 @@
       &:focus .arrow {
         transform: rotate(0deg);
       }
+    }
+  }
+
+  .countWrapper {
+    position: absolute;
+    z-index: 99;
+    right: 50px;
+    bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    justify-content: center;
+    align-items: start;
+    box-sizing: border-box;
+    padding: 29px 32px;
+    border-radius: 20px;
+    background-color: var(--main);
+    max-width: 284px;
+    max-height: 118px;
+
+    .countCheck {
+      display: inline-block;
+      padding: 12px;
+      border-radius: 13px;
+      background-color: #0957c3;
+      max-height: 30px;
+      max-width: 30px;
+
+      .checkIcon {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    .countDesc {
+      font-weight: 400;
+      font-size: 16px;
+      color: rgba(17, 16, 28, 0.5);
+    }
+    .count {
+      font-weight: 700;
+      font-size: 24px;
+      color: #11101c;
     }
   }
 }
