@@ -2,10 +2,10 @@ import { lazy, Suspense } from 'react';
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
-const HomePage = lazy(() => import('./components/pages/HomePage'));
-const NanniesPage = lazy(() => import('./components/pages/NanniesPage'));
-const FavoritesPage = lazy(() => import('./components/pages/FavoritesPage'));
-const NotFoundPage = lazy(() => import('./components/pages/NotFoundPage'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const NanniesPage = lazy(() => import('./pages/NanniesPage'));
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 function App() {
   return (
