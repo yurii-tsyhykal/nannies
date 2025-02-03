@@ -3,9 +3,15 @@ import css from './Header.module.css';
 import Button from '../Button/Button';
 import clsx from 'clsx';
 
-const Header = (type) => {
+const Header = ({ type }) => {
   return (
-    <header className={clsx(css.headerHome, !type && css.header)}>
+    <header
+      className={clsx(
+        css.header,
+        type && css.headerHome,
+        !type && css.headerNotHome
+      )}
+    >
       <Link to="/" className={css.logo}>
         Nanny.Services
       </Link>
