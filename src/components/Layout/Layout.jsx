@@ -9,7 +9,7 @@ const Layout = () => {
   console.log(isHomePage);
 
   return (
-    <div className={clsx(css.layoutWrapper)}>
+    <div className={clsx(css.layoutWrapper, !isHomePage && css.layoutWrapperNotHome)}>
       <Header type={isHomePage} />
       <main>
         <Outlet />

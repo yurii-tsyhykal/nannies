@@ -76,3 +76,8 @@ button {
   font-family: inherit;
   cursor: pointer;
 }
+
+img {
+  display: block;
+  height: auto;
+}
