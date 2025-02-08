@@ -6,7 +6,7 @@
   align-items: center;
   max-height: 120px;
   max-width: 120px;
-  /* grid-area: 1 / 1 / 4 / 2; */
+  grid-area: 1 / 1 / 4 / 2;
   border: 2px solid rgba(240, 63, 59, 0.2);
   border-radius: 30px;
   padding: 12px;
@@ -34,5 +34,42 @@
   }
   .avatar {
     border-radius: 15px;
+  }
+}
+
+.nannyName {
+  grid-area: 1 / 2 / 2 / 3;
+  .role {
+    font-weight: 500;
+    color: #8a8a89;
+  }
+
+  .name {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1;
+    color: #11101c;
+  }
+}
+
+.info {
+  grid-area: 1 / 3 / 2 / 4;
+  display: flex;
+  gap: 32px;
+  font-weight: 500;
+  color: #11101c;
+  p:not(:last-child) {
+    position: relative;
+    &::after {
+      content: '';
+      position: absolute;
+      right: -16px;
+      top: 0;
+      width: 1px;
+      height: 16px;
+      background-color: rgba(17, 16, 28, 0.2);
+    }
+  }
+  .location {
   }
 }
