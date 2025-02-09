@@ -42,6 +42,7 @@
   .role {
     font-weight: 500;
     color: #8a8a89;
+    margin-bottom: 8px;
   }
 
   .name {
@@ -72,4 +73,29 @@
   }
   .location {
   }
+}
+
+.profileList {
+  grid-area: 2 / 2 / 3 / 4;
+  font-weight: 500;
+  color: #8a8a89;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  & > li {
+    max-height: 1.5em;
+    border-radius: 24px;
+    padding: 8px 16px;
+    background-color: #f3f3f3;
+    .profileValue {
+      color: #11101c;
+    }
+  }
+}
+
+.about {
+  margin-top: 24px;
+  grid-area: 3 / 2 / 4 / 4;
+  line-height: 1.25;
+  color: rgba(17, 16, 28, 0.5);
 }
