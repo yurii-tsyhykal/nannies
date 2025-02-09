@@ -1,0 +1,50 @@
+.reviewsList {
+  margin-top: 48px;
+  grid-area: 4 / 2 / 5 / 4;
+  color: black;
+  & > li {
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+    .profileWrapper {
+      margin-bottom: 16px;
+      max-width: 111px;
+      max-height: 44px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      .avatar {
+        display: inline-block;
+        border-radius: 100px;
+        background-color: rgba(9, 87, 195, 0.2);
+        color: #0957c3;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 44px;
+        text-align: center;
+        vertical-align: middle;
+        width: 44px;
+        height: 44px;
+        margin-right: 12px;
+      }
+      .ReviewersName {
+        display: block;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1.25;
+        color: #11101c;
+      }
+      .rating {
+        display: block;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.29;
+        color: #11101c;
+      }
+    }
+    .comment {
+      line-height: 1.25;
+      color: rgba(17, 16, 28, 0.5);
+    }
+  }
+}

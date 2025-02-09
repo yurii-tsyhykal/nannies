@@ -2,9 +2,12 @@
   .listItem {
     padding: 24px;
     display: grid;
-    grid-template-columns: auto 1fr 1fr;
-    grid-template-rows: auto 1fr 1fr;
+    grid-template-columns: 144px 450px 1fr;
+    grid-template-rows: 80px 88px 60px 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    &:not(:last-child) {
+      margin-bottom: 32px;
+    }
   }
 }
