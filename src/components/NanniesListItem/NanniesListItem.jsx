@@ -1,10 +1,12 @@
 import css from './NanniesListItem.module.css';
-import { IoLocationOutline } from 'react-icons/io5';
 import { FaStar } from 'react-icons/fa6';
+import { GrLocation } from 'react-icons/gr';
+import { FaRegHeart } from 'react-icons/fa6';
 import ageCalculate from '../../utils/ageCalc';
 import charactersToUpper from '../../utils/CharactersToUpper';
 import { useState } from 'react';
 import Reviews from '../Reviews/Reviews';
+import Button from '../Button/Button';
 
 const NanniesListItem = ({ nanny }) => {
   const [visibleReviews, setVisibleReviews] = useState(false);
@@ -28,7 +30,7 @@ const NanniesListItem = ({ nanny }) => {
       </div>
       <div className={css.info}>
         <p className={css.location}>
-          <IoLocationOutline
+          <GrLocation
             className={css.locationIcon}
             width={16}
             height={16}
@@ -50,6 +52,9 @@ const NanniesListItem = ({ nanny }) => {
           Price / 1 hour:{' '}
           <span style={{ color: '#38cd3e' }}>{nanny.price_per_hour}$</span>
         </p>
+        <Button type='favorites'>
+          <FaRegHeart width={26} height={26} />
+        </Button>
       </div>
       <ul className={css.profileList}>
         <li>
@@ -71,13 +76,12 @@ const NanniesListItem = ({ nanny }) => {
       </ul>
       <p className={css.about}>{nanny.about}</p>
       {!visibleReviews ? (
-        <button
-          type="button"
-          style={{ color: 'black' }}
-          onClick={() => setVisibleReviews(true)}
+        <Button
+          type={'review'}
+          onClick={() => setTimeout(() => setVisibleReviews(true), 300)}
         >
           Read more
-        </button>
+        </Button>
       ) : (
         <Reviews reviews={nanny.reviews} />
       )}

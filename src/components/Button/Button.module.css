@@ -27,3 +27,22 @@
   font-size: 16px;
   letter-spacing: -0.01em;
 }
+
+.review {
+  margin-top: 14px;
+  grid-area: 4 / 2 / 5 / 3;
+  text-align: start;
+  background-color: transparent;
+  font-weight: 500;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #11101c;
+}
+
+.favorites {
+  margin-left: 16px;
+  background-color: transparent;
+  max-width: 26px;
+  max-height: 26px;
+}
