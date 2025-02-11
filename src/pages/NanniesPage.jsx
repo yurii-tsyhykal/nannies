@@ -8,6 +8,7 @@ import {
 import { useEffect } from 'react';
 import { getNannies } from '../redux/nannies/operations';
 import NanniesList from '../components/NanniesList/NanniesList';
+import Button from '../components/Button/Button';
 
 const NanniesPage = () => {
   const dispatch = useDispatch();
@@ -31,9 +32,9 @@ const NanniesPage = () => {
     <>
       {nannies.length && <NanniesList nannies={nannies} />}
       {hasMore && (
-        <button type="button" onClick={loadMore}>
+        <Button type="load-more" onClick={loadMore}>
           Load More
-        </button>
+        </Button>
       )}
     </>
   );

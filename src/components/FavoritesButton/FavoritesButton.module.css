@@ -1,0 +1,13 @@
+.heartIcon {
+  width: 26px;
+  height: 26px;
+  fill: #11101c;
+  stroke: transparent;
+}
+
+.heartIconActive {
+  width: 26px;
+  height: 26px;
+  fill: var(--background);
+  stroke: var(--background);
+}
