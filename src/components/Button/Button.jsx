@@ -8,7 +8,8 @@ const Button = ({ children, type, ...rest }) => {
       className={clsx(
         css.button,
         (type === 'login' && css.logInBtn) ||
-          (type === 'registration' && css.registration) ||
+        (type === 'registration' && css.registration) ||
+        (type === 'load-more' && css.loadMore) ||
         (type === 'review' && css.review) ||
         (type === 'favorites' && css.favorites)
       )}

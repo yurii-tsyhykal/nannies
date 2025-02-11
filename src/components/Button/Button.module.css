@@ -28,6 +28,16 @@
   letter-spacing: -0.01em;
 }
 
+.loadMore {
+  display: block;
+  margin: 0 auto;
+  background-color: var(--background);
+  border-radius: 30px;
+  padding: 14px 40px;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
 .review {
   margin-top: 14px;
   grid-area: 4 / 2 / 5 / 3;
@@ -43,6 +53,6 @@
 .favorites {
   margin-left: 16px;
   background-color: transparent;
-  max-width: 26px;
-  max-height: 26px;
+  width: 26px;
+  height: 26px;
 }

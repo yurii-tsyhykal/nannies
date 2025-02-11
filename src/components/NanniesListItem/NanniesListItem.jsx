@@ -1,12 +1,12 @@
 import css from './NanniesListItem.module.css';
 import { FaStar } from 'react-icons/fa6';
 import { GrLocation } from 'react-icons/gr';
-import { FaRegHeart } from 'react-icons/fa6';
 import ageCalculate from '../../utils/ageCalc';
 import charactersToUpper from '../../utils/CharactersToUpper';
 import { useState } from 'react';
 import Reviews from '../Reviews/Reviews';
 import Button from '../Button/Button';
+import FavoritesButton from '../FavoritesButton/FavoritesButton';
 
 const NanniesListItem = ({ nanny }) => {
   const [visibleReviews, setVisibleReviews] = useState(false);
@@ -52,9 +52,7 @@ const NanniesListItem = ({ nanny }) => {
           Price / 1 hour:{' '}
           <span style={{ color: '#38cd3e' }}>{nanny.price_per_hour}$</span>
         </p>
-        <Button type='favorites'>
-          <FaRegHeart width={26} height={26} />
-        </Button>
+       <FavoritesButton />
       </div>
       <ul className={css.profileList}>
         <li>
