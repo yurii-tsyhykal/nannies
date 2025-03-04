@@ -5,10 +5,11 @@ import {
   selectLastKey,
   selectNannies,
 } from '../redux/nannies/selectors';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { getNannies } from '../redux/nannies/operations';
 import NanniesList from '../components/NanniesList/NanniesList';
 import Button from '../components/Button/Button';
+import Filters from '../components/Filters/Filters';
 
 const NanniesPage = () => {
   const dispatch = useDispatch();
@@ -16,23 +17,27 @@ const NanniesPage = () => {
   const lastKey = useSelector(selectLastKey);
   const error = useSelector(selectError);
   const hasMore = useSelector(selectHasMore);
+  const isFetched = useRef(false);
   console.log('nannies', nannies);
   console.log('lastKey', lastKey);
-  console.log(error);
 
   useEffect(() => {
-    dispatch(getNannies({ limit: 3 }));
+    if (isFetched.current) return;
+    isFetched.current = true;
+    dispatch(getNannies({ limit: 3, filter: 'name' }));
   }, [dispatch]);
+
   const loadMore = () => {
     if (hasMore) {
-      dispatch(getNannies({ startKey: lastKey, limit: 3 }));
+      dispatch(getNannies({ startKey: lastKey, limit: 3, filter: 'name' }));
     }
   };
   return (
     <>
+      <Filters />
       {nannies.length && <NanniesList nannies={nannies} />}
       {hasMore && (
-        <Button type="load-more" onClick={loadMore}>
+        <Button type="button" variant="load-more" onClick={loadMore}>
           Load More
         </Button>
       )}

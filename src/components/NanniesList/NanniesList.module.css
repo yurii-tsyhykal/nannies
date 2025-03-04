@@ -5,10 +5,10 @@
     background-color: var(--main);
     padding: 24px;
     display: grid;
-    grid-template-columns: 144px 450px 1fr;
-    grid-template-rows: 80px 88px 60px 1fr;
+    grid-template-columns: 144px 350px 1fr;
+    grid-template-rows: auto auto auto auto;
     grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-row-gap: 20px;
     &:not(:last-child) {
       margin-bottom: 32px;
     }
