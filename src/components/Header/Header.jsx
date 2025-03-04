@@ -27,8 +27,12 @@ const Header = ({ type }) => {
           </ul>
         </nav>
         <div>
-          <Button type="login">Log In</Button>
-          <Button type="registration">Registration</Button>
+          <Button type="button" variant="login">
+            Log In
+          </Button>
+          <Button type="button" variant="registration">
+            Registration
+          </Button>
         </div>
       </div>
     </header>

@@ -1,0 +1,11 @@
+.reviewsList {
+  margin-top: 28px;
+  grid-area: 4 / 2 / 5 / 4;
+  color: black;
+  & > li {
+    &:not(:last-child) {
+      margin-bottom: 25px;
+    }
+   
+  }
+}

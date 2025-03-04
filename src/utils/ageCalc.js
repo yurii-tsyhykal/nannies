@@ -16,7 +16,7 @@ function ageCalculate(date) {
     currentMonth < birthMonth ||
     (currentMonth === birthMonth && currentDay < birthDay)
   ) {
-    ageInYears - 1;
+    ageInYears -= 1;
   }
 
   return ageInYears;

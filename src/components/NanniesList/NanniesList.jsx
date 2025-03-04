@@ -1,15 +1,17 @@
+import List from '../List/List';
 import NanniesListItem from '../NanniesListItem/NanniesListItem';
 import css from './NanniesList.module.css';
 
 const NanniesList = ({ nannies }) => {
   return (
-    <ul className={css.nanniesList}>
-      {nannies.map(nanny => (
-        <li key={nanny.id} className={css.listItem}>
-          <NanniesListItem nanny={nanny} />
-        </li>
-      ))}
-    </ul>
+    nannies.length && (
+      <List
+        data={nannies}
+        renderItem={nanny => <NanniesListItem nanny={nanny} />}
+        listClassName={css.nanniesList}
+        itemClassName={css.listItem}
+      />
+    )
   );
 };
 

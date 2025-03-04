@@ -11,7 +11,7 @@ const INITIAL_STATE = {
 
 function FilteringPayload(payload, state) {
   return payload.filter(
-    newItem => !state.items.some(existing => existing.id === newItem.id)
+    newItem => !state.items.some(exist => exist.id === newItem.id)
   );
 }
 
@@ -22,7 +22,6 @@ const nanniesSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(getNannies.pending, state => {
-        // state.items = [];
         state.isLoading = true;
         state.error = null;
       })
@@ -32,12 +31,14 @@ const nanniesSlice = createSlice({
           state.hasMore = false;
           return;
         }
-        const newItems = FilteringPayload(payload, state);
-        state.items = [...state.items, ...newItems];
         console.log('payload', payload);
+        // const newItems = FilteringPayload(payload, state);
+        const newNannies = payload.filter(nanny => nanny != null);
+        state.items = [...state.items, ...newNannies];
 
         if (payload.length > 0) {
-          state.lastKey = payload[payload.length - 1].id;
+          state.lastKey = payload[payload.length - 1].name[0];
+          console.log('lastKey', state.lastKey);
         }
       })
       .addCase(getNannies.rejected, (state, { payload }) => {

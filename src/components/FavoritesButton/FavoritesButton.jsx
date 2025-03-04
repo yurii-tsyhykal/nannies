@@ -7,7 +7,11 @@ const FavoritesButton = () => {
   const [isActive, setIsActive] = useState(false);
   return (
     <>
-      <Button type="favorites" onClick={() => setIsActive(prev => !prev)}>
+      <Button
+        type="button"
+        variant="favorites"
+        onClick={() => setIsActive(prev => !prev)}
+      >
         {isActive ? (
           <FaHeart className={css.heartIconActive} />
         ) : (

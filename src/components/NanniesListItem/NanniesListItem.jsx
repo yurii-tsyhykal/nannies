@@ -4,7 +4,7 @@ import { GrLocation } from 'react-icons/gr';
 import ageCalculate from '../../utils/ageCalc';
 import charactersToUpper from '../../utils/CharactersToUpper';
 import { useState } from 'react';
-import Reviews from '../Reviews/Reviews';
+import Reviews from '../ReviewsList/ReviewsList';
 import Button from '../Button/Button';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
 
@@ -52,7 +52,7 @@ const NanniesListItem = ({ nanny }) => {
           Price / 1 hour:{' '}
           <span style={{ color: '#38cd3e' }}>{nanny.price_per_hour}$</span>
         </p>
-       <FavoritesButton />
+        <FavoritesButton />
       </div>
       <ul className={css.profileList}>
         <li>
@@ -75,7 +75,8 @@ const NanniesListItem = ({ nanny }) => {
       <p className={css.about}>{nanny.about}</p>
       {!visibleReviews ? (
         <Button
-          type={'review'}
+          type="button"
+          variant="review"
           onClick={() => setTimeout(() => setVisibleReviews(true), 300)}
         >
           Read more

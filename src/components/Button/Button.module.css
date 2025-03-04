@@ -39,7 +39,6 @@
 }
 
 .review {
-  margin-top: 14px;
   grid-area: 4 / 2 / 5 / 3;
   text-align: start;
   background-color: transparent;

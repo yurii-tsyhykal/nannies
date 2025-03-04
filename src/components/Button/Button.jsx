@@ -1,17 +1,17 @@
 import clsx from 'clsx';
 import css from './Button.module.css';
 
-const Button = ({ children, type, ...rest }) => {
+const Button = ({ children, type, variant, ...rest }) => {
   return (
     <button
-      type="button"
+      type={type}
       className={clsx(
         css.button,
-        (type === 'login' && css.logInBtn) ||
-        (type === 'registration' && css.registration) ||
-        (type === 'load-more' && css.loadMore) ||
-        (type === 'review' && css.review) ||
-        (type === 'favorites' && css.favorites)
+        ( variant=== 'login' && css.logInBtn) ||
+        ( variant=== 'registration' && css.registration) ||
+        ( variant=== 'load-more' && css.loadMore) ||
+        ( variant=== 'review' && css.review) ||
+        ( variant=== 'favorites' && css.favorites)
       )}
       {...rest}
     >
