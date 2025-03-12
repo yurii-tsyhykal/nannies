@@ -2,35 +2,32 @@ import { filterStyles } from './FiltersStyles';
 import { options } from '../../constants/filterOptions';
 import Select from 'react-select';
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectFilter } from '../../redux/nannies/selectors';
+import { setFilter } from '../../redux/nannies/slice';
+import { getNannies } from '../../redux/nannies/operations';
 
 const Filters = () => {
-  const [selectedOption, setSelectedOption] = useState(options[0]);
-  console.log(selectedOption);
+  const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
+  const defaultFilter = options.find(i => i?.value === filter);
+  const [selectedOption, setSelectedOption] = useState(defaultFilter);
+  const handleChange = (value) => {
+    setSelectedOption(value)
+    dispatch(setFilter(value.value));
+    dispatch(getNannies());
+  };
   
   return <>
   <p>Filters</p>
   <Select isSearchable={false}
-          defaultValue={selectedOption}
-          onChange={setSelectedOption}
+          value={selectedOption}
+          onChange={handleChange}
           options={options}
           styles={filterStyles} 
-          className='react' 
-          classNamePrefix='select'
           isOptionDisabled={(option) => option.value === selectedOption?.value}
           />
   </>;
 };
 
 export default Filters;
-
-{/* <form>
-<p>Filters</p>
-<List
-  data={filtersArray}
-  ListWrapper="select"
-  ItemWrapper="option"
-  renderItem={item => item}
-  listClassName={css.selectList}
-  itemClassName={css.optionItem}
-/>
-</form> */}
