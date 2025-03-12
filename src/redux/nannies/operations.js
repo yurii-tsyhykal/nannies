@@ -1,52 +1,45 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from '../../services/firebaseConfig';
-import {
-  endAt,
-  get,
-  limitToFirst,
-  orderByChild,
-  orderByKey,
-  query,
-  ref,
-  startAt,
-} from 'firebase/database';
+import { get, ref } from 'firebase/database';
+import createNanniesQuery from '../../helpers/createNanniesQuery';
 
 export const getNannies = createAsyncThunk(
   'nannies/getAll',
-  async ({ limit, filter }, thunkApi) => {
-    const {startKey} = thunkApi.getState().nannies;
-    console.log('filter', startKey);
+  async (_, thunkApi) => {
+    // console.log('lastKey', lastKey);
 
     try {
-      const nanniesRef = ref(db, '/');
-      let q;
-      if (startKey || filter) {
-        q = query(
-          nanniesRef,
-          orderByChild(filter),
-          startKey ? startAt(String(startKey)) : startAt('A'),
-          endAt('Z\uf8ff'),
-          limitToFirst(limit)
-        );
-      } else {
-        q = query(nanniesRef, orderByKey(), limitToFirst(limit));
-      }
-      const nannies = await get(q);
+      const { filter, limit, lastKey, items } = thunkApi.getState().nannies;
+      const nanniesRef = ref(db, '/nannies');
+      const nannies = await get(
+        createNanniesQuery(nanniesRef, filter, lastKey, limit)
+      );
       if (nannies.exists()) {
-        const data = nannies.val();
-        console.table('data', data);
+        let nanniesArray = [];
+        nannies.forEach(childSnapshot => {
+          nanniesArray.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
 
-        let nanniesArray = Array.isArray(data)
-          ? data
-          : Object.entries(data).map(([id, value]) => ({
-              id,
-              ...value,
-            }));
+        if (
+          (filter === 'z-to-a' || filter === 'popular') &&
+          items.length > 0 &&
+          lastKey
+        ) {
+          console.log('filter yes', nanniesArray);
+          nanniesArray = nanniesArray.filter(
+            exists => exists.id !== lastKey.id
+          );
+        }
         return nanniesArray;
       } else {
         return [];
       }
     } catch (error) {
+      console.log('error', thunkApi.rejectWithValue(error.message));
+
       return thunkApi.rejectWithValue(error.message);
     }
   }

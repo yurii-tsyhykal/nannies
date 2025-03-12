@@ -1,24 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getNannies } from './operations';
+import getLastKey from '../../helpers/getLastKey';
 
 const INITIAL_STATE = {
   items: [],
   isLoading: false,
   error: null,
   lastKey: null,
+  limit: 3,
   hasMore: true,
+  filter: 'all',
 };
-
-function FilteringPayload(payload, state) {
-  return payload.filter(
-    newItem => !state.items.some(exist => exist.id === newItem.id)
-  );
-}
 
 const nanniesSlice = createSlice({
   name: 'nannies',
   initialState: INITIAL_STATE,
-  reducers: {},
+  reducers: {
+    setFilter: (state, { payload }) => {
+      state.filter = payload;
+      state.items = [];
+      state.lastKey = null;
+      state.hasMore = true;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getNannies.pending, state => {
@@ -27,19 +31,21 @@ const nanniesSlice = createSlice({
       })
       .addCase(getNannies.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        if (payload.length === 0) {
-          state.hasMore = false;
-          return;
+
+        if (state.filter === 'z-to-a' || state.filter === 'popular') {
+          payload.reverse();
         }
-        console.log('payload', payload);
-        // const newItems = FilteringPayload(payload, state);
-        const newNannies = payload.filter(nanny => nanny != null);
-        state.items = [...state.items, ...newNannies];
+
+        if (state.filter === 'all' || payload.length < state.limit) {
+          state.hasMore = false;
+        }
 
         if (payload.length > 0) {
-          state.lastKey = payload[payload.length - 1].name[0];
-          console.log('lastKey', state.lastKey);
+          const lastItem = payload[payload.length - 1];
+          state.lastKey = getLastKey(lastItem, state);
         }
+
+        state.items = [...state.items, ...payload];
       })
       .addCase(getNannies.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -47,5 +53,7 @@ const nanniesSlice = createSlice({
       });
   },
 });
+
+export const { setFilter } = nanniesSlice.actions;
 
 export const nanniesReducer = nanniesSlice.reducer;
