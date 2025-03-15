@@ -7,7 +7,6 @@ import Loader from '../Loader/Loader';
 import { useState } from 'react';
 
 const SignUpForm = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const {
     register,
     handleSubmit,
