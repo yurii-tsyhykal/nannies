@@ -55,3 +55,23 @@
   width: 26px;
   height: 26px;
 }
+
+.signUpLogInModals {
+  min-width: 100%;
+  border-radius: 30px;
+  padding: 16px;
+  background-color: var(--background);
+  font-family: var(--font-family);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--main);
+}
+
+.closeModal {
+  stroke: var(--focus-filter);
+  background-color: transparent;
+  border-color: transparent;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}

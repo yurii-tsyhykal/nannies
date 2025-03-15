@@ -17,14 +17,14 @@ const NanniesPage = () => {
   const hasMore = useSelector(selectHasMore);
   const isFetched = useRef(false);
   console.log('nannies', nannies);
-  
-
 
   useEffect(() => {
     if (isFetched.current) return;
-    isFetched.current = true;
-    dispatch(getNannies());
-  }, [dispatch]);
+    if (nannies.length === 0) {
+      isFetched.current = true;
+      dispatch(getNannies());
+    }
+  }, [dispatch, nannies]);
 
   const loadMore = () => {
     if (hasMore) {
@@ -34,8 +34,11 @@ const NanniesPage = () => {
   return (
     <>
       <Filters />
-      {nannies.length ? <NanniesList nannies={nannies}/> : <p>At now we have not any nannies</p>}
-      {/* {nannies.length && <NanniesList nannies={nannies}/>} */}
+      {nannies.length ? (
+        <NanniesList nannies={nannies} />
+      ) : (
+        <p>We have not nannies now</p>
+      )}
       {hasMore && (
         <Button type="button" variant="load-more" onClick={loadMore}>
           Load More
