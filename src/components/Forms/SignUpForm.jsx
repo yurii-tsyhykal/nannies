@@ -3,8 +3,11 @@ import css from './SignUpForm.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../Button/Button';
 import { registerNewUser } from '../../services/signUpNewUsers';
+import Loader from '../Loader/Loader';
+import { useState } from 'react';
 
 const SignUpForm = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const {
     register,
     handleSubmit,
@@ -44,7 +47,10 @@ const SignUpForm = () => {
         placeholder="Password"
         {...register('password', { required: true })}
       />
-
+      {/* {isLoading ? <Loader /> :
+      <Button type="submit" variant="signUp-logIn-modals">
+        Sign Up
+      </Button>} */}
       <Button type="submit" variant="signUp-logIn-modals">
         Sign Up
       </Button>
