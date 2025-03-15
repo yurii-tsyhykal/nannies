@@ -7,11 +7,13 @@ const Button = ({ children, type, variant, ...rest }) => {
       type={type}
       className={clsx(
         css.button,
-        ( variant=== 'login' && css.logInBtn) ||
-        ( variant=== 'registration' && css.registration) ||
-        ( variant=== 'load-more' && css.loadMore) ||
-        ( variant=== 'review' && css.review) ||
-        ( variant=== 'favorites' && css.favorites)
+        (variant === 'login' && css.logInBtn) ||
+          (variant === 'registration' && css.registration) ||
+          (variant === 'load-more' && css.loadMore) ||
+          (variant === 'review' && css.review) ||
+          (variant === 'favorites' && css.favorites) ||
+          (variant === 'signUp-logIn-modals' && css.signUpLogInModals) ||
+          (variant === 'close-modal' && css.closeModal)
       )}
       {...rest}
     >
