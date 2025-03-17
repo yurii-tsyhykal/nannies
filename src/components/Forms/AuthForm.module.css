@@ -16,7 +16,19 @@
     color: rgba(17, 16, 28, 0.5);
     margin-bottom: 40px;
   }
-
+  label {
+    display: block;
+    position: relative;
+    .eyeIcon {
+      position: absolute;
+      top: 1rem;
+      right: 1.13rem;
+      z-index: 1;
+      cursor: pointer;
+      stroke: var(--focus-filter);
+      fill: transparent;
+    }
+  }
   input {
     background-color: transparent;
     box-sizing: border-box;
