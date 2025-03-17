@@ -4,14 +4,14 @@ import Button from '../Button/Button';
 import clsx from 'clsx';
 import { useState } from 'react';
 import FormModal from '../FormModal/FormModal';
-import SignUpForm from '../Forms/SignUpForm';
+import SignUpForm from '../Forms/SignUpForm/SignUpForm';
+import LogInForm from '../Forms/LogInForm/LogInForm';
 
 const Header = ({ type }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const openModal = () => {
-    setIsOpen(true);
-  };
-  const closeModal = () => setIsOpen(false);
+  const [modalContent, setModalContent] = useState(null);
+
+  const openModal = content => setModalContent(content);
+  const closeModal = () => setModalContent(null);
 
   return (
     <header
@@ -36,14 +36,22 @@ const Header = ({ type }) => {
           </ul>
         </nav>
         <div>
-          <Button type="button" variant="login" onClick={openModal}>
+          <Button
+            type="button"
+            variant="login"
+            onClick={() => openModal(<LogInForm />)}
+          >
             Log In
           </Button>
-          <Button type="button" variant="registration" onClick={openModal}>
+          <Button
+            type="button"
+            variant="registration"
+            onClick={() => openModal(<SignUpForm />)}
+          >
             Registration
           </Button>
-          <FormModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
-            <SignUpForm />
+          <FormModal modalIsOpen={!!modalContent} closeModal={closeModal}>
+            {modalContent}
           </FormModal>
         </div>
       </div>

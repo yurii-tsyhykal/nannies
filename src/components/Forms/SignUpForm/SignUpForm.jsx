@@ -1,10 +1,8 @@
 import { useForm } from 'react-hook-form';
-import css from './SignUpForm.module.css';
+import css from '../AuthForm.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Button from '../Button/Button';
-import { registerNewUser } from '../../services/signUpNewUsers';
-import Loader from '../Loader/Loader';
-import { useState } from 'react';
+import Button from '../../Button/Button';
+import { registerNewUser } from '../../../services/signUpNewUsers';
 
 const SignUpForm = () => {
   const {
