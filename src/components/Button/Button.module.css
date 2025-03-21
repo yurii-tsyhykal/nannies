@@ -1,31 +1,33 @@
 .button {
+  font-family: var(--font-family);
   padding: 0;
   font-size: inherit;
+  font-size: 16px;
   color: inherit;
-  letter-spacing: inherit;
   outline: transparent;
   border: transparent;
-  border-radius: 30px;
-}
-
-.logInBtn {
   background-color: transparent;
-  border: 1px solid rgba(251, 251, 251, 0.4);
-  padding: 13px 39px;
+  border-radius: 30px;
   font-weight: 500;
   line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+.logInBtn,
+.logOut {
+  border: 1px solid rgba(251, 251, 251, 0.4);
+  padding: 13px 39px;
   margin-right: 8px;
+  &.logOut {
+    vertical-align: middle;
+  }
 }
 
 .registration {
   background-color: var(--background);
   border: transparent;
   padding: 14px 40px;
-  font-weight: 500;
-  line-height: 1.25;
-  font-weight: 500;
   font-size: 16px;
-  letter-spacing: -0.01em;
 }
 
 .loadMore {
@@ -34,15 +36,11 @@
   background-color: var(--background);
   border-radius: 30px;
   padding: 14px 40px;
-  font-weight: 500;
-  line-height: 1.25;
 }
 
 .review {
   grid-area: 4 / 2 / 5 / 3;
   text-align: start;
-  background-color: transparent;
-  font-weight: 500;
   line-height: 1.5;
   text-decoration: underline;
   text-decoration-skip-ink: none;
@@ -51,7 +49,6 @@
 
 .favorites {
   margin-left: 16px;
-  background-color: transparent;
   width: 26px;
   height: 26px;
 }
@@ -61,15 +58,11 @@
   border-radius: 30px;
   padding: 16px;
   background-color: var(--background);
-  font-family: var(--font-family);
-  font-weight: 500;
-  line-height: 1.25;
   color: var(--main);
 }
 
 .closeModal {
   stroke: var(--focus-filter);
-  background-color: transparent;
   border-color: transparent;
   position: absolute;
   top: 20px;

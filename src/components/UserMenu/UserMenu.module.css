@@ -1,0 +1,21 @@
+.userMenuWrapper {
+  .userAvatar {
+    vertical-align: middle;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 8px;
+    background-color: var(--main);
+    margin-right: 14px;
+    & svg {
+      display: block;
+    }
+  }
+  .userName {
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 24px;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.11;
+  }
+}
