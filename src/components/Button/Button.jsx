@@ -13,7 +13,8 @@ const Button = ({ children, type, variant, ...rest }) => {
           (variant === 'review' && css.review) ||
           (variant === 'favorites' && css.favorites) ||
           (variant === 'signUp-logIn-modals' && css.signUpLogInModals) ||
-          (variant === 'close-modal' && css.closeModal)
+          (variant === 'close-modal' && css.closeModal) ||
+          (variant === 'logOut' && css.logOut)
       )}
       {...rest}
     >

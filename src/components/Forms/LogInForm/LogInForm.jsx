@@ -2,21 +2,26 @@ import { useForm } from 'react-hook-form';
 import css from '../AuthForm.module.css';
 import { useId, useState } from 'react';
 import Button from '../../Button/Button';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../../../redux/auth/operations';
 
 const LogInForm = () => {
+  const dispatch = useDispatch();
   const [isOffEye, setIsOffEye] = useState(true);
-  const handleClick = () => setIsOffEye(!isOffEye);
   const pwdId = useId();
+  const handleClick = () => setIsOffEye(!isOffEye);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   return (
     <form
       className={css.form}
       onSubmit={handleSubmit(data => {
         console.log(data);
+        dispatch(signIn(data));
       })}
     >
       <h2 className={css.formTitle}>Log In</h2>
