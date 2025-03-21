@@ -40,7 +40,7 @@ const Header = ({ type }) => {
           </ul>
         </nav>
         {isAuthenticated ? (
-          <UserMenu />
+          <UserMenu closeModal={closeModal} />
         ) : (
           <div>
             <Button

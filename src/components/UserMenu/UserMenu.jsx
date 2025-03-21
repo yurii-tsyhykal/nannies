@@ -4,11 +4,12 @@ import css from './UserMenu.module.css';
 import { selectAuthUser } from '../../redux/auth/selectors';
 import { logOutUser } from '../../services/logOutUser';
 
-const UserMenu = () => {
+const UserMenu = ({ closeModal }) => {
   const user = useSelector(selectAuthUser);
 
   const handleLogOut = async () => {
     await logOutUser();
+    closeModal();
   };
   return (
     <div className={css.userMenuWrapper}>
