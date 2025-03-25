@@ -37,6 +37,11 @@ const Header = ({ type }) => {
             <li>
               <NavLink to="nannies">Nannies</NavLink>
             </li>
+            {!type && isAuthenticated && (
+              <li>
+                <NavLink to="favorites">Favorites</NavLink>
+              </li>
+            )}
           </ul>
         </nav>
         {isAuthenticated ? (
