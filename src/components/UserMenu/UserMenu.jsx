@@ -8,8 +8,8 @@ const UserMenu = ({ closeModal }) => {
   const user = useSelector(selectAuthUser);
 
   const handleLogOut = async () => {
-    await logOutUser();
     closeModal();
+    await logOutUser();
   };
   return (
     <div className={css.userMenuWrapper}>

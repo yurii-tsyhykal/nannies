@@ -2,12 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from '../../services/firebaseConfig';
 import { get, ref } from 'firebase/database';
 import createNanniesQuery from '../../helpers/createNanniesQuery';
+import { snapshotToArray } from '../../utils/snapshotToArray';
 
 export const getNannies = createAsyncThunk(
   'nannies/getAll',
   async (_, thunkApi) => {
-    // console.log('lastKey', lastKey);
-
     try {
       const { filter, limit, lastKey, items } = thunkApi.getState().nannies;
       const nanniesRef = ref(db, '/nannies');
@@ -16,12 +15,7 @@ export const getNannies = createAsyncThunk(
       );
       if (nannies.exists()) {
         let nanniesArray = [];
-        nannies.forEach(childSnapshot => {
-          nanniesArray.push({
-            id: childSnapshot.key,
-            ...childSnapshot.val(),
-          });
-        });
+        nanniesArray = snapshotToArray(nannies);
 
         if (
           (filter === 'z-to-a' || filter === 'popular') &&

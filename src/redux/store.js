@@ -12,6 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { nanniesReducer } from './nannies/slice';
 import { authReducer } from './auth/slice';
+import { favoritesReducer } from './favorites/slice';
 
 const persistAuthConfig = {
   key: 'auth',
@@ -23,6 +24,7 @@ export const store = configureStore({
   reducer: {
     auth: persistReducer(persistAuthConfig, authReducer),
     nannies: nanniesReducer,
+    favorites: favoritesReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

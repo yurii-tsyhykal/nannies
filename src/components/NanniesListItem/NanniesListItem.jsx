@@ -52,7 +52,7 @@ const NanniesListItem = ({ nanny }) => {
           Price / 1 hour:{' '}
           <span style={{ color: '#38cd3e' }}>{nanny.price_per_hour}$</span>
         </p>
-        <FavoritesButton />
+        <FavoritesButton nanny={nanny} />
       </div>
       <ul className={css.profileList}>
         <li>

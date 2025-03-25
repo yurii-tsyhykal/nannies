@@ -1,22 +1,51 @@
-import { useState } from 'react';
-import { FaRegHeart, FaHeart } from 'react-icons/fa6';
+import { useEffect, useState } from 'react';
 import css from './FavoritesButton.module.css';
 import Button from '../Button/Button';
+import clsx from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectAuthUID,
+  selectIsAuthenticated,
+} from '../../redux/auth/selectors';
+import { selectFavNannies } from '../../redux/favorites/selectors';
+import {
+  getFavorites,
+  toggleFavorites,
+} from '../../redux/favorites/operations';
 
-const FavoritesButton = () => {
-  const [isActive, setIsActive] = useState(false);
+const FavoritesButton = ({ nanny }) => {
+  const dispatch = useDispatch();
+  const uid = useSelector(selectAuthUID);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const favorites = useSelector(selectFavNannies);
+  const [isFavorite, setIsFavorite] = useState(false);
+  useEffect(() => {
+    if (uid && isAuthenticated) {
+      dispatch(getFavorites({ uid }));
+    }
+  }, [dispatch, isAuthenticated, uid]);
+
+  useEffect(() => {
+    if (favorites && nanny.id) {
+      setIsFavorite(favorites.some(item => item.id === nanny.id));
+    }
+  }, [favorites, nanny.id]);
+
+  const handleClick = () => {
+    if (!uid) return alert('login or registration');
+    setIsFavorite(prev => !prev);
+    dispatch(toggleFavorites({ uid, nanny }));
+  };
   return (
     <>
-      <Button
-        type="button"
-        variant="favorites"
-        onClick={() => setIsActive(prev => !prev)}
-      >
-        {isActive ? (
-          <FaHeart className={css.heartIconActive} />
-        ) : (
-          <FaRegHeart className={css.heartIcon} />
-        )}
+      <Button type="button" variant="favorites" onClick={handleClick}>
+        <svg
+          width={26}
+          height={26}
+          className={clsx(css.heartIcon, isFavorite && css.heartIconActive)}
+        >
+          <use href="/public/images/sprite.svg#heart"></use>
+        </svg>
       </Button>
     </>
   );

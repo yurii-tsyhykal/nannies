@@ -1,8 +1,9 @@
 .heartIcon {
   width: 26px;
   height: 26px;
-  fill: #11101c;
-  stroke: transparent;
+  fill: transparent;
+  stroke: var(--focus-filter);
+  transition: fill var(--transition), stroke var(--transition);
 }
 
 .heartIconActive {

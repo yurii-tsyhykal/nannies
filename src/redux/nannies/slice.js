@@ -16,7 +16,7 @@ const nanniesSlice = createSlice({
   name: 'nannies',
   initialState: INITIAL_STATE,
   reducers: {
-    setFilter: (state, { payload }) => {
+    setNannyFilter: (state, { payload }) => {
       state.filter = payload;
       state.items = [];
       state.lastKey = null;
@@ -54,6 +54,6 @@ const nanniesSlice = createSlice({
   },
 });
 
-export const { setFilter } = nanniesSlice.actions;
+export const { setNannyFilter } = nanniesSlice.actions;
 
 export const nanniesReducer = nanniesSlice.reducer;
