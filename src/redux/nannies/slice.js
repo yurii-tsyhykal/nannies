@@ -44,6 +44,7 @@ const nanniesSlice = createSlice({
           const lastItem = payload[payload.length - 1];
           state.lastKey = getLastKey(lastItem, state);
         }
+        console.log('lastkey slice', state.lastKey);
 
         state.items = [...state.items, ...payload];
       })

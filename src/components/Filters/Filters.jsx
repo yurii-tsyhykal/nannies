@@ -10,28 +10,30 @@ import css from './Filters.module.css';
 import { selectFavFilter } from '../../redux/favorites/selectors';
 import { setFavFilter } from '../../redux/favorites/slice';
 import { getFavorites } from '../../redux/favorites/operations';
+import { selectAuthUID } from '../../redux/auth/selectors';
 
 const Filters = ({ isFavPage }) => {
   const dispatch = useDispatch();
   const NannyFilter = useSelector(selectFilter);
   const favFilter = useSelector(selectFavFilter);
+  const uid = useSelector(selectAuthUID);
   const filter = isFavPage ? favFilter : NannyFilter;
   const defaultFilter = options.find(i => i?.value === filter);
   const [selectedOption, setSelectedOption] = useState(defaultFilter);
 
   const handleChangeOnNannies = value => {
     console.log('home');
-    
+
     setSelectedOption(value);
     dispatch(setNannyFilter(value.value));
     dispatch(getNannies());
   };
   const handleChangeOnFavs = value => {
-    console.log('favs');
-    
+    console.log('favs', value);
+
     setSelectedOption(value);
     dispatch(setFavFilter(value.value));
-    dispatch(getFavorites());
+    dispatch(getFavorites({ uid }));
   };
 
   return (

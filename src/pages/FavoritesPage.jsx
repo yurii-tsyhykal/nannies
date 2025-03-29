@@ -20,13 +20,13 @@ const FavoritesPage = () => {
   const hasMore = useSelector(selectFavHasMore);
   const uid = useSelector(selectAuthUID);
 
-  useEffect(() => {
-    if (isFetched.current) return;
-    if (favorites.length === 0) {
-      isFetched.current = true;
-      dispatch(getFavorites({ uid }));
-    }
-  }, [dispatch, favorites.length, uid]);
+  // useEffect(() => {
+  //   if (isFetched.current) return;
+  //   if (favorites.length === 0) {
+  //     isFetched.current = true;
+  //     dispatch(getFavorites({ uid }));
+  //   }
+  // }, [dispatch, favorites.length, uid]);
   const loadMore = () => {
     if (hasMore) {
       dispatch(getFavorites({ uid }));

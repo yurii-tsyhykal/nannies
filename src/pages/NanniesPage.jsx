@@ -22,7 +22,7 @@ const NanniesPage = () => {
     if (isFetched.current) return;
     if (nannies.length === 0) {
       isFetched.current = true;
-      
+
       dispatch(getNannies());
       console.log('home');
     }

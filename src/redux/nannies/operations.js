@@ -7,8 +7,10 @@ import { snapshotToArray } from '../../utils/snapshotToArray';
 export const getNannies = createAsyncThunk(
   'nannies/getAll',
   async (_, thunkApi) => {
+    const { filter, limit, lastKey, items } = thunkApi.getState().nannies;
     try {
-      const { filter, limit, lastKey, items } = thunkApi.getState().nannies;
+      console.log('last key', lastKey);
+
       const nanniesRef = ref(db, '/nannies');
       const nannies = await get(
         createNanniesQuery(nanniesRef, filter, lastKey, limit)

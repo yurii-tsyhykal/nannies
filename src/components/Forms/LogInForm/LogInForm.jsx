@@ -2,11 +2,18 @@ import { useForm } from 'react-hook-form';
 import css from '../AuthForm.module.css';
 import { useId, useState } from 'react';
 import Button from '../../Button/Button';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../../redux/auth/operations';
+import { getFavorites } from '../../../redux/favorites/operations';
+import {
+  selectAuthIsLoading,
+  selectAuthUID,
+} from '../../../redux/auth/selectors';
 
 const LogInForm = () => {
   const dispatch = useDispatch();
+  const uid = useSelector(selectAuthUID);
+  const isAuthenticated = useSelector(selectAuthIsLoading);
   const [isOffEye, setIsOffEye] = useState(true);
   const pwdId = useId();
   const handleClick = () => setIsOffEye(!isOffEye);
@@ -20,8 +27,10 @@ const LogInForm = () => {
     <form
       className={css.form}
       onSubmit={handleSubmit(data => {
-        console.log(data);
         dispatch(signIn(data));
+        if (uid && isAuthenticated) {
+          dispatch(getFavorites({ uid }));
+        }
       })}
     >
       <h2 className={css.formTitle}>Log In</h2>
