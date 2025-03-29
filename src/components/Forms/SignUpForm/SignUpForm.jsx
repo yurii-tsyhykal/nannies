@@ -3,8 +3,17 @@ import css from '../AuthForm.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../Button/Button';
 import { registerNewUser } from '../../../services/registerNewUser';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectAuthIsLoading,
+  selectAuthUID,
+} from '../../../redux/auth/selectors';
+import { getFavorites } from '../../../redux/favorites/operations';
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
+  const uid = useSelector(selectAuthUID);
+  const isAuthenticated = useSelector(selectAuthIsLoading);
   const {
     register,
     handleSubmit,
@@ -14,8 +23,10 @@ const SignUpForm = () => {
     <form
       className={css.form}
       onSubmit={handleSubmit(data => {
-        console.log(data);
         registerNewUser(data);
+        if (uid && isAuthenticated) {
+          dispatch(getFavorites({ uid }));
+        }
       })}
     >
       <h2 className={css.formTitle}>Registration</h2>

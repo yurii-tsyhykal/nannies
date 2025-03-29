@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import css from './FavoritesButton.module.css';
 import Button from '../Button/Button';
 import clsx from 'clsx';
@@ -8,32 +7,18 @@ import {
   selectIsAuthenticated,
 } from '../../redux/auth/selectors';
 import { selectFavNannies } from '../../redux/favorites/selectors';
-import {
-  getFavorites,
-  toggleFavorites,
-} from '../../redux/favorites/operations';
+import { toggleFavorites } from '../../redux/favorites/operations';
 
 const FavoritesButton = ({ nanny }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const favorites = useSelector(selectFavNannies);
-  const [isFavorite, setIsFavorite] = useState(false);
-  useEffect(() => {
-    if (uid && isAuthenticated) {
-      dispatch(getFavorites({ uid }));
-    }
-  }, [dispatch, isAuthenticated, uid]);
 
-  useEffect(() => {
-    if (favorites && nanny.id) {
-      setIsFavorite(favorites.some(item => item.id === nanny.id));
-    }
-  }, [favorites, nanny.id]);
+  const isFavorite = favorites.some(item => item.id === nanny.id);
 
   const handleClick = () => {
-    if (!uid) return alert('login or registration');
-    setIsFavorite(prev => !prev);
+    if (!uid || !isAuthenticated) return alert('login or registration');
     dispatch(toggleFavorites({ uid, nanny }));
   };
   return (

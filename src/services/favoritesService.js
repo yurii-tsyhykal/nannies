@@ -11,9 +11,9 @@ export const getFavoritesNannies = async (
   items
 ) => {
   if (!uid) throw new Error('No uid provided');
+  console.log('items', lastKey);
 
   const favRef = ref(db, `users/${uid}/favorites`);
-
 
   const nannies = await get(createNanniesQuery(favRef, filter, lastKey, limit));
   if (nannies.exists()) {

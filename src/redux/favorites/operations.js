@@ -8,6 +8,7 @@ export const getFavorites = createAsyncThunk(
   'favorites/getFavorites',
   async ({ uid }, thunkApi) => {
     const { filter, limit, lastKey, items } = thunkApi.getState().favorites;
+
     try {
       const favorites = await getFavoritesNannies(
         uid,

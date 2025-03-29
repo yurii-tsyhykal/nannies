@@ -9,7 +9,7 @@ const INITIAL_STATE = {
   lastKey: null,
   limit: 3,
   hasMore: true,
-  filter: 'popular',
+  filter: 'all',
 };
 
 const favoritesSlice = createSlice({
@@ -35,13 +35,17 @@ const favoritesSlice = createSlice({
         if (state.filter === 'all' || payload.length < state.limit) {
           state.hasMore = false;
         }
-
+        
+        console.log('state.lastkey before', state.lastKey);
         if (payload.length > 0) {
           const lastItem = payload[payload.length - 1];
           state.lastKey = getLastKey(lastItem, state);
         }
 
-        state.items = payload;
+        state.items = [...state.items, ...payload];
+        console.log('state.lastkey after', state.lastKey);
+        console.log(state.items.length);
+        
       })
       .addCase(toggleFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
