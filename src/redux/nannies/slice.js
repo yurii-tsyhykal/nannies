@@ -22,6 +22,7 @@ const nanniesSlice = createSlice({
       state.lastKey = null;
       state.hasMore = true;
     },
+    clearNannyState: () => INITIAL_STATE,
   },
   extraReducers: builder => {
     builder
@@ -55,6 +56,6 @@ const nanniesSlice = createSlice({
   },
 });
 
-export const { setNannyFilter } = nanniesSlice.actions;
+export const { setNannyFilter, clearNannyState } = nanniesSlice.actions;
 
 export const nanniesReducer = nanniesSlice.reducer;

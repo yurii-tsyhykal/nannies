@@ -19,6 +19,8 @@ const FavoritesPage = () => {
   const isFetched = useRef(false);
   const hasMore = useSelector(selectFavHasMore);
   const uid = useSelector(selectAuthUID);
+  console.log(favorites);
+  
 
   // useEffect(() => {
   //   if (isFetched.current) return;

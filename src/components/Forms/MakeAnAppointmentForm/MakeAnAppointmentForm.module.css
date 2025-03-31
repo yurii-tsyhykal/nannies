@@ -1,0 +1,69 @@
+@import url(../AuthForm.module.css);
+
+.nanny {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  column-gap: 14px;
+  max-height: 44px;
+  margin-bottom: 40px;
+  .nannyAvatar {
+    border-radius: 15px;
+  }
+  p {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.33;
+    color: #8a8a89;
+    margin-bottom: 4px;
+  }
+  .nannyName {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--black);
+  }
+}
+
+.form.formAp {
+  max-width: 600px;
+  input {
+    max-width: 472px;
+  }
+
+  textarea {
+    box-sizing: border-box;
+    display: block;
+    font-family: var(--font-family);
+    color: inherit;
+    font-weight: inherit;
+    resize: none;
+    max-width: 472px;
+    width: 100%;
+    border-color: var(--input-singIn);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: inherit;
+    line-height: 1.25;
+    margin-bottom: 40px;
+    &::placeholder {
+      color: inherit;
+    }
+  }
+  .inputWrapper {
+    input {
+      width: 100%;
+      margin-bottom: 16px;
+      &:nth-child(-n + 4) {
+        max-width: 232px;
+        display: inline-block;
+        min-width: 0;
+      }
+      &:nth-child(odd) {
+        margin-right: 8px;
+      }
+    }
+  }
+}

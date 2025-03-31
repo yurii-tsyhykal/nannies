@@ -1,6 +1,5 @@
 import { get, ref, set } from 'firebase/database';
 import { db } from './firebaseConfig';
-import { snapshotToArray } from '../utils/snapshotToArray';
 import createNanniesQuery from '../helpers/createNanniesQuery';
 
 export const getFavoritesNannies = async (
@@ -11,14 +10,18 @@ export const getFavoritesNannies = async (
   items
 ) => {
   if (!uid) throw new Error('No uid provided');
-  console.log('items', lastKey);
 
   const favRef = ref(db, `users/${uid}/favorites`);
 
   const nannies = await get(createNanniesQuery(favRef, filter, lastKey, limit));
   if (nannies.exists()) {
     let data = [];
-    data = snapshotToArray(nannies);
+     nannies.forEach(childSnapshot => {
+       data.push({
+         id: childSnapshot.key,
+         ...childSnapshot.val(),
+       });
+     });
     if (
       (filter === 'z-to-a' || filter === 'popular') &&
       items.length > 0 &&

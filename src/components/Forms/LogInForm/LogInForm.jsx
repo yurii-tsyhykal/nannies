@@ -10,7 +10,7 @@ import {
   selectAuthUID,
 } from '../../../redux/auth/selectors';
 
-const LogInForm = () => {
+const LogInForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
   const isAuthenticated = useSelector(selectAuthIsLoading);
@@ -28,6 +28,7 @@ const LogInForm = () => {
       className={css.form}
       onSubmit={handleSubmit(data => {
         dispatch(signIn(data));
+        closeModal();
         if (uid && isAuthenticated) {
           dispatch(getFavorites({ uid }));
         }

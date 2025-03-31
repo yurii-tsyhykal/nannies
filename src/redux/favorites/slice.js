@@ -22,6 +22,7 @@ const favoritesSlice = createSlice({
       state.lastKey = null;
       state.hasMore = true;
     },
+    clearFavState: () => INITIAL_STATE,
   },
   extraReducers: builder =>
     builder
@@ -35,21 +36,22 @@ const favoritesSlice = createSlice({
         if (state.filter === 'all' || payload.length < state.limit) {
           state.hasMore = false;
         }
-        
-        console.log('state.lastkey before', state.lastKey);
+
         if (payload.length > 0) {
           const lastItem = payload[payload.length - 1];
           state.lastKey = getLastKey(lastItem, state);
         }
+        console.log('state.lastkey', state.lastKey);
+        console.log('payload', payload);
 
         state.items = [...state.items, ...payload];
-        console.log('state.lastkey after', state.lastKey);
-        console.log(state.items.length);
-        
+        console.log('state.items', state.items);
       })
       .addCase(toggleFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.items = payload;
+        console.log('toggle');
+        console.log(state.items);
       })
       .addMatcher(
         isAnyOf(getFavorites.pending, toggleFavorites.pending),
@@ -66,5 +68,6 @@ const favoritesSlice = createSlice({
         }
       ),
 });
-export const { setFavFilter } = favoritesSlice.actions;
+
+export const { setFavFilter, clearFavState } = favoritesSlice.actions;
 export const favoritesReducer = favoritesSlice.reducer;

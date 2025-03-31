@@ -4,27 +4,26 @@ import Modal from 'react-modal';
 
 Modal.setAppElement('#root');
 
-const customStyles = {
-  content: {
-    position: 'relative',
-    border: 'none',
-    borderRadius: '30px',
-    padding: 0,
-    maxWidth: '566px',
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-  overlay: {
-    zIndex: '99',
-    backgroundColor: 'rgba(11, 11, 11, 0.6)',
-  },
-};
-
-const FormModal = ({ modalIsOpen, closeModal, children }) => {
+const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
+  const customStyles = {
+    content: {
+      position: 'relative',
+      border: 'none',
+      borderRadius: '30px',
+      padding: 0,
+      maxWidth: variant === 'appointment' ? '600px' : '566px',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+    overlay: {
+      zIndex: '99',
+      backgroundColor: 'rgba(11, 11, 11, 0.6)',
+    },
+  };
   return (
     <Modal
       isOpen={modalIsOpen}
@@ -33,7 +32,7 @@ const FormModal = ({ modalIsOpen, closeModal, children }) => {
       bodyOpenClassName={css.modalOpen}
       contentLabel="Example Modal"
     >
-      <Button type={'button'} variant='close-modal' onClick={closeModal}>
+      <Button type={'button'} variant="close-modal" onClick={closeModal}>
         <svg width={32} height={32}>
           <use href="/public/images/sprite.svg#close-modal"></use>
         </svg>

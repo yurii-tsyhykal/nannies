@@ -14,6 +14,7 @@ const FavoritesButton = ({ nanny }) => {
   const uid = useSelector(selectAuthUID);
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const favorites = useSelector(selectFavNannies);
+  
 
   const isFavorite = favorites.some(item => item.id === nanny.id);
 

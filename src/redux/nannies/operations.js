@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { db } from '../../services/firebaseConfig';
 import { get, ref } from 'firebase/database';
 import createNanniesQuery from '../../helpers/createNanniesQuery';
-import { snapshotToArray } from '../../utils/snapshotToArray';
 
 export const getNannies = createAsyncThunk(
   'nannies/getAll',
@@ -17,7 +16,12 @@ export const getNannies = createAsyncThunk(
       );
       if (nannies.exists()) {
         let nanniesArray = [];
-        nanniesArray = snapshotToArray(nannies);
+        nannies.forEach(childSnapshot => {
+          nanniesArray.push({
+            id: childSnapshot.key,
+            ...childSnapshot.val(),
+          });
+        });
 
         if (
           (filter === 'z-to-a' || filter === 'popular') &&
