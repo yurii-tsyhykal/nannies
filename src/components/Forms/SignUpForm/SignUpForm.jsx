@@ -10,7 +10,7 @@ import {
 } from '../../../redux/auth/selectors';
 import { getFavorites } from '../../../redux/favorites/operations';
 
-const SignUpForm = () => {
+const SignUpForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
   const isAuthenticated = useSelector(selectAuthIsLoading);
@@ -24,6 +24,7 @@ const SignUpForm = () => {
       className={css.form}
       onSubmit={handleSubmit(data => {
         registerNewUser(data);
+        closeModal();
         if (uid && isAuthenticated) {
           dispatch(getFavorites({ uid }));
         }

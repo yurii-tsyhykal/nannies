@@ -14,8 +14,14 @@ const Header = ({ type }) => {
   const [modalContent, setModalContent] = useState(null);
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
-  const openModal = content => setModalContent(content);
-  const closeModal = () => setModalContent(null);
+  const openModal = content => {
+    console.log('modal is open');
+    setModalContent(content);
+  };
+  const closeModal = () => {
+    console.log('modal is close');
+    setModalContent(null);
+  };
 
   return (
     <header
@@ -45,26 +51,28 @@ const Header = ({ type }) => {
           </ul>
         </nav>
         {isAuthenticated ? (
-          <UserMenu closeModal={closeModal} />
+          <UserMenu />
         ) : (
           <div>
             <Button
               type="button"
               variant="login"
-              onClick={() => openModal(<LogInForm />)}
+              onClick={() => openModal(<LogInForm closeModal={closeModal} />)}
             >
               Log In
             </Button>
             <Button
               type="button"
               variant="registration"
-              onClick={() => openModal(<SignUpForm />)}
+              onClick={() => openModal(<SignUpForm closeModal={closeModal} />)}
             >
               Registration
             </Button>
-            <FormModal modalIsOpen={!!modalContent} closeModal={closeModal}>
-              {modalContent}
-            </FormModal>
+            {modalContent && (
+              <FormModal modalIsOpen={!!modalContent} closeModal={closeModal}>
+                {modalContent}
+              </FormModal>
+            )}
           </div>
         )}
       </div>

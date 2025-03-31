@@ -28,21 +28,20 @@
   line-height: 1.5;
   font-weight: 400;
   letter-spacing: -0.01em;
-  --font-family: 'Helvetica Neue', sans-serif;
-  --main: #fbfbfb;
-  --background: #0957c3;
-  --transition: 250ms linear;
-  --focus-filter: #11101c;
-  --input-singIn: rgba(17, 16, 28, 0.1);
-
   color-scheme: light dark;
   color: var(--main);
   background-color: var(--main);
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --font-family: 'Helvetica Neue', sans-serif;
+  --main: #fbfbfb;
+  --background: #0957c3;
+  --transition: 250ms linear;
+  --black: #11101c;
+  --input-singIn: rgba(17, 16, 28, 0.1);
 }
 
 p {
@@ -77,9 +76,12 @@ h6 {
 button {
   font-family: inherit;
   cursor: pointer;
+  padding: 0;
+  border: none;
 }
 
 img {
   display: block;
+  max-width: 100%;
   height: auto;
 }

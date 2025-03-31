@@ -16,6 +16,8 @@ export default function createNanniesQuery(
   limit
 ) {
   let q;
+  console.log(limit);
+
   switch (filter) {
     case 'a-to-z':
       if (lastKey) {

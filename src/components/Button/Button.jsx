@@ -14,7 +14,9 @@ const Button = ({ children, type, variant, ...rest }) => {
           (variant === 'favorites' && css.favorites) ||
           (variant === 'signUp-logIn-modals' && css.signUpLogInModals) ||
           (variant === 'close-modal' && css.closeModal) ||
-          (variant === 'logOut' && css.logOut)
+          (variant === 'logOut' && css.logOut) ||
+          (variant === 'make-app' && css.makeAppointment) ||
+          (variant === 'send-app' && css.sendAppointment)
       )}
       {...rest}
     >

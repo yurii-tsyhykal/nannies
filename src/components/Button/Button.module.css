@@ -62,9 +62,21 @@
 }
 
 .closeModal {
-  stroke: var(--focus-filter);
+  stroke: var(--black);
   border-color: transparent;
   position: absolute;
   top: 20px;
   right: 20px;
+}
+
+.makeAppointment {
+  grid-area: 5 / 2 / 6 / 4;
+  background-color: var(--background);
+  padding: 14px 28px;
+  display: inline-block;
+  max-width: 215px;
+}
+
+.sendAppointment {
+  composes: signUpLogInModals;
 }

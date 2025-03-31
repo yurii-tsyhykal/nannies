@@ -2,7 +2,7 @@
   width: 26px;
   height: 26px;
   fill: transparent;
-  stroke: var(--focus-filter);
+  stroke: var(--black);
   transition: fill var(--transition), stroke var(--transition);
 }
 

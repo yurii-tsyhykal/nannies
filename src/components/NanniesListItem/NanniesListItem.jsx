@@ -7,11 +7,26 @@ import { useState } from 'react';
 import Reviews from '../ReviewsList/ReviewsList';
 import Button from '../Button/Button';
 import FavoritesButton from '../FavoritesButton/FavoritesButton';
+import FormModal from '../FormModal/FormModal';
+import { selectIsAuthenticated } from '../../redux/auth/selectors';
+import { useSelector } from 'react-redux';
+import MakeAnAppointmentForm from '../Forms/MakeAnAppointmentForm/MakeAnAppointmentForm';
 
 const NanniesListItem = ({ nanny }) => {
+  const [modalContent, setModalContent] = useState(null);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const [visibleReviews, setVisibleReviews] = useState(false);
   const age = ageCalculate(nanny.birthday);
   const characters = charactersToUpper(nanny.characters);
+
+  const openModal = content => {
+    console.log('modal is open');
+    setModalContent(content);
+  };
+  const closeModal = () => {
+    console.log('modal is close');
+    setModalContent(null);
+  };
 
   return (
     <>
@@ -82,7 +97,28 @@ const NanniesListItem = ({ nanny }) => {
           Read more
         </Button>
       ) : (
-        <Reviews reviews={nanny.reviews} />
+        <>
+          <Reviews reviews={nanny.reviews} />
+          <Button
+            type="button"
+            variant="make-app"
+            onClick={() =>
+              openModal(
+                <MakeAnAppointmentForm
+                  closeModal={closeModal}
+                  nanny={{ url: nanny.avatar_url, name: nanny.name }}
+                />
+              )
+            }
+          >
+            Make an appointment
+          </Button>
+          {modalContent && (
+            <FormModal modalIsOpen={!!modalContent} closeModal={closeModal} variant='appointment'>
+              {modalContent}
+            </FormModal>
+          )}
+        </>
       )}
     </>
   );
