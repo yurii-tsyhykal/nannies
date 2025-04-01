@@ -1,8 +1,7 @@
 import { appointmentStyles } from './appointmentStyles';
-import { useState } from 'react';
+import { forwardRef } from 'react';
 import Select, { components } from 'react-select';
 import dayjs from 'dayjs';
-import icons from '/images/sprite.svg';
 
 const createTimeSlots = (startHour, endHour, stepMinutes) => {
   const options = [];
@@ -24,13 +23,6 @@ const timeOptions = createTimeSlots(9, 18, 30);
 const ControlWithIcon = ({ children, ...props }) => (
   <components.Control {...props}>
     {children}
-    {/* <BiTime
-      style={{
-        color: 'var(--black)',
-        width: '20px',
-        height: '20px',
-      }}
-    /> */}
     <svg
       width={20}
       height={20}
@@ -60,20 +52,33 @@ const MenuListWithTitle = props => (
   </components.MenuList>
 );
 
-const SingleListTimePicker = () => {
-  const [selectedTime, setSelectedTime] = useState(null);
+const SingleListTimePicker = forwardRef(function SingleListTimePicker(
+  { value, onChange, name, ...rest },
+  ref
+) {
+  const findOptionByValue = val => {
+    return timeOptions.find(option => option.value === val) || null;
+  };
+
+  const handleSelectChange = selectedOption => {
+    onChange(selectedOption ? selectedOption.value : null);
+  };
 
   return (
     <Select
-      value={selectedTime}
-      onChange={setSelectedTime}
+      name={name}
+      value={findOptionByValue(value)}
+      onChange={handleSelectChange}
       options={timeOptions}
       styles={appointmentStyles}
       components={{ Control: ControlWithIcon, MenuList: MenuListWithTitle }}
       placeholder="00 : 00"
       isSearchable={false}
+      ref={ref}
+      {...rest}
     />
   );
-};
+});
 
+// SingleListTimePicker.displayName = 'SingleListTimePicker';
 export default SingleListTimePicker;
