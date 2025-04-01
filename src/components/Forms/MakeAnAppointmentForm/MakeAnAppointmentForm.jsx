@@ -1,7 +1,6 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import css from './MakeAnAppointmentForm.module.css';
 import clsx from 'clsx';
-import dayjs from 'dayjs';
 import SingleListTimePicker from '../../SingleListTimePicker/SingleListTimePicker';
 import Button from '../../Button/Button';
 
@@ -9,16 +8,19 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
+
+  const onSubmit = data => {
+    console.log(data);
+    closeModal();
+  };
 
   return (
     <form
       className={clsx(css.form, css.formAp)}
-      onSubmit={handleSubmit(data => {
-        console.log(data);
-        closeModal();
-      })}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className={css.formTitle}>Make an appointment with a babysitter</h2>
       <p className={css.formText}>
@@ -51,7 +53,7 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
           placeholder="+380"
           {...register('tel', {
             required: true,
-            min: 4,
+            min: 9,
           })}
         />
         <input
@@ -59,10 +61,15 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
           placeholder="Child's Age"
           {...register('age', {
             required: true,
-            min: 4,
+            min: 1,
           })}
         />
-        <SingleListTimePicker />
+        <Controller
+          name="time"
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => <SingleListTimePicker {...field} />}
+        />
       </div>
       <input
         type="text"
@@ -78,8 +85,7 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
         placeholder="Father's or mother's name"
         {...register('name', {
           required: true,
-          min: 4,
-          pattern: /^\S+@\S+$/i,
+          min: 2,
         })}
       />
       <textarea
@@ -87,9 +93,7 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
         placeholder="Comment"
         rows={4}
         {...register('comment', {
-          required: true,
           min: 4,
-          pattern: /^\S+@\S+$/i,
         })}
       ></textarea>
       <Button type="submit" variant="send-app">
