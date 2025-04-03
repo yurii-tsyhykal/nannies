@@ -32,26 +32,30 @@
   input {
     max-width: 472px;
   }
-
-  textarea {
-    box-sizing: border-box;
-    display: block;
-    font-family: var(--font-family);
-    color: inherit;
-    font-weight: inherit;
-    resize: none;
-    max-width: 472px;
-    width: 100%;
-    border-color: var(--input-singIn);
-    border-radius: 12px;
-    padding: 16px 18px;
-    font-size: inherit;
-    line-height: 1.25;
-    margin-bottom: 40px;
-    &::placeholder {
+  .errorWrapper {
+    position: relative;
+    display: inline-block;
+    textarea {
+      box-sizing: border-box;
+      display: block;
+      font-family: var(--font-family);
       color: inherit;
+      font-weight: inherit;
+      resize: none;
+      max-width: 472px;
+      width: 100%;
+      border-color: var(--input-singIn);
+      border-radius: 12px;
+      padding: 16px 18px;
+      font-size: inherit;
+      line-height: 1.25;
+      margin-bottom: 40px;
+      &::placeholder {
+        color: inherit;
+      }
     }
   }
+
   .inputWrapper {
     input {
       width: 100%;

@@ -16,7 +16,7 @@ export const appointmentStyles = {
       borderColor: 'var(--input-singIn)',
     },
     boxShadow: state.isFocused && 'none',
-    borderRadius: '8px',
+    borderRadius: '12px',
     cursor: 'pointer',
     maxHeight: '52px',
     display: 'flex',

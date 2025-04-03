@@ -80,5 +80,4 @@ const SingleListTimePicker = forwardRef(function SingleListTimePicker(
   );
 });
 
-// SingleListTimePicker.displayName = 'SingleListTimePicker';
 export default SingleListTimePicker;
