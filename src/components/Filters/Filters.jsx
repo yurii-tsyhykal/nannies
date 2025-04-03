@@ -1,5 +1,5 @@
 import { filterStyles } from './FiltersStyles';
-import { options } from '../../constants/filterOptions';
+import { OPTIONS } from '../../helpers/constants';
 import Select from 'react-select';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ const Filters = ({ isFavPage }) => {
   const favFilter = useSelector(selectFavFilter);
   const uid = useSelector(selectAuthUID);
   const filter = isFavPage ? favFilter : NannyFilter;
-  const defaultFilter = options.find(i => i?.value === filter);
+  const defaultFilter = OPTIONS.find(i => i?.value === filter);
   const [selectedOption, setSelectedOption] = useState(defaultFilter);
 
   const handleChangeOnNannies = value => {
@@ -43,7 +43,7 @@ const Filters = ({ isFavPage }) => {
         isSearchable={false}
         value={selectedOption}
         onChange={isFavPage ? handleChangeOnFavs : handleChangeOnNannies}
-        options={options}
+        options={OPTIONS}
         styles={filterStyles}
         isOptionDisabled={option => option.value === selectedOption?.value}
       />

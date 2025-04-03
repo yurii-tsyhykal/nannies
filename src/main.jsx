@@ -12,12 +12,13 @@ import { initAuthListener } from './services/initAuthListnener.js';
 initAuthListener();
 
 createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <PersistGate loading={<Loader />} persistor={persistor}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </PersistGate>
-  </Provider>
+  // <StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={<Loader />} persistor={persistor}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
   // </StrictMode>
 );
