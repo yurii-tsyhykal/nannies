@@ -31,50 +31,52 @@ const Header = ({ type }) => {
         !type && css.headerNotHome
       )}
     >
-      <Link to="/" className={css.logo}>
-        Nanny.Services
-      </Link>
-      <div className={clsx(css.navWrapper, !type && css.notHomeNavWrapper)}>
-        <nav>
-          <ul className={css.navList}>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="nannies">Nannies</NavLink>
-            </li>
-            {!type && isAuthenticated && (
+      <div className={css.headerContainer}>
+        <Link to="/" className={css.logo}>
+          Nanny.Services
+        </Link>
+        <div className={clsx(css.navWrapper, !type && css.notHomeNavWrapper)}>
+          <nav>
+            <ul className={css.navList}>
               <li>
-                <NavLink to="favorites">Favorites</NavLink>
+                <NavLink to="/">Home</NavLink>
               </li>
-            )}
-          </ul>
-        </nav>
-        {isAuthenticated ? (
-          <UserMenu />
-        ) : (
-          <div>
-            <Button
-              type="button"
-              variant="login"
-              onClick={() => openModal(<LogInForm closeModal={closeModal} />)}
-            >
-              Log In
-            </Button>
-            <Button
-              type="button"
-              variant="registration"
-              onClick={() => openModal(<SignUpForm closeModal={closeModal} />)}
-            >
-              Registration
-            </Button>
-            {modalContent && (
-              <FormModal modalIsOpen={!!modalContent} closeModal={closeModal}>
-                {modalContent}
-              </FormModal>
-            )}
-          </div>
-        )}
+              <li>
+                <NavLink to="nannies">Nannies</NavLink>
+              </li>
+              {!type && isAuthenticated && (
+                <li>
+                  <NavLink to="favorites">Favorites</NavLink>
+                </li>
+              )}
+            </ul>
+          </nav>
+          {isAuthenticated ? (
+            <UserMenu />
+          ) : (
+            <div>
+              <Button
+                type="button"
+                variant="login"
+                onClick={() => openModal(<LogInForm closeModal={closeModal} />)}
+              >
+                Log In
+              </Button>
+              <Button
+                type="button"
+                variant="registration"
+                onClick={() => openModal(<SignUpForm closeModal={closeModal} />)}
+              >
+                Registration
+              </Button>
+              {modalContent && (
+                <FormModal modalIsOpen={!!modalContent} closeModal={closeModal}>
+                  {modalContent}
+                </FormModal>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

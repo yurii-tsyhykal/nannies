@@ -31,10 +31,17 @@
   max-width: 600px;
   input {
     max-width: 472px;
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
   }
   .errorWrapper {
     position: relative;
     display: inline-block;
+    &:nth-child(n + 5) {
+      display: block;
+      margin-bottom: 16px;
+    }
     textarea {
       box-sizing: border-box;
       display: block;
@@ -57,17 +64,16 @@
   }
 
   .inputWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 8px;
+    row-gap: 16px;
+    margin-bottom: 16px;
     input {
+      min-width: 232px;
       width: 100%;
-      margin-bottom: 16px;
-      &:nth-child(-n + 4) {
-        max-width: 232px;
-        display: inline-block;
-        min-width: 0;
-      }
-      &:nth-child(odd) {
-        margin-right: 8px;
-      }
+      margin-bottom: 0;
     }
   }
 }

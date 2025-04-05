@@ -66,6 +66,7 @@ export const appointmentStyles = {
   }),
   menuList: styles => ({
     ...styles,
+    zIndex: '10',
     maxHeight: '180px',
     maxWidth: '151px',
     textAlign: 'center',
