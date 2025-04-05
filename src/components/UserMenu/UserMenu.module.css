@@ -8,6 +8,7 @@
     margin-right: 14px;
     & svg {
       display: block;
+      fill: var(--background);
     }
   }
   .userName {

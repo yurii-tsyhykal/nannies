@@ -1,10 +1,13 @@
 .header {
   z-index: 9;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 96px;
-
+  .headerContainer {
+    max-width: 1180px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0px;
+  }
   .logo {
     font-weight: 500;
     font-size: 24px;
