@@ -34,7 +34,7 @@ const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
     >
       <Button type={'button'} variant="close-modal" onClick={closeModal}>
         <svg width={32} height={32}>
-          <use href="/public/images/sprite.svg#close-modal"></use>
+          <use href="/images/sprite.svg#close-modal"></use>
         </svg>
       </Button>
       {children}

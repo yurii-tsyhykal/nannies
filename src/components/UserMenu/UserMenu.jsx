@@ -14,7 +14,7 @@ const UserMenu = () => {
     <div className={css.userMenuWrapper}>
       <div className={css.userAvatar}>
         <svg width={24} height={24}>
-          <use href="/public/images/sprite.svg#user-default-icon"></use>
+          <use href="/images/sprite.svg#user-default-icon"></use>
         </svg>
       </div>
       <p className={css.userName}>{user.username}</p>

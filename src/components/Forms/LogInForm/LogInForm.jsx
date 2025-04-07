@@ -56,7 +56,7 @@ const LogInForm = ({ closeModal }) => {
           className={css.eyeIcon}
         >
           <use
-            href={`/public/images/sprite.svg#${isOffEye ? 'eye-off' : 'eye'}`}
+            href={`/images/sprite.svg#${isOffEye ? 'eye-off' : 'eye'}`}
           ></use>
         </svg>
         <input
