@@ -30,7 +30,7 @@ const FavoritesButton = ({ nanny }) => {
           height={26}
           className={clsx(css.heartIcon, isFavorite && css.heartIconActive)}
         >
-          <use href="/public/images/sprite.svg#heart"></use>
+          <use href="/images/sprite.svg#heart"></use>
         </svg>
       </Button>
     </>
