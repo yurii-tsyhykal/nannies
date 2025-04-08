@@ -32,3 +32,10 @@ export const NAME_MIN_ERROR_MESSAGE = 'At least 2 letters';
 
 export const COMMENT_REGEX_ERROR_MESSAGE = 'Enter a valid name';
 export const COMMENT_MIN_ERROR_MESSAGE = 'This field cannot be empty';
+
+export const PASSWORD_REQUIRED = 'Password is required';
+export const PASSWORD_MIN_ERROR_MESSAGE = 'At least 8 letters';
+export const PASSWORD_LOWER_CASE = 'At least one lowercase letter';
+export const PASSWORD_UPPER_CASE = 'At least one uppercase letter';
+export const PASSWORD_NUMBER = 'At least one number';
+export const PASSWORD_SYMBOL = 'At least one symbol (@$!%*?&)';

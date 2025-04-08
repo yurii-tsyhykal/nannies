@@ -16,7 +16,7 @@
     color: rgba(17, 16, 28, 0.5);
     margin-bottom: 40px;
   }
-  label {
+  .password {
     display: block;
     position: relative;
     .eyeIcon {
@@ -29,31 +29,35 @@
       fill: transparent;
     }
   }
-  input {
-    background-color: transparent;
-    box-sizing: border-box;
+  .errorWrapper {
+    position: relative;
+    display: inline-block;
     min-width: 100%;
-    border: 1px solid var(--input-singIn);
-    border-radius: 12px;
-    padding: 15px;
-    padding-left: 18px;
-    line-height: 1.25;
-    font-weight: 400;
-    font-size: 16px;
-    &::placeholder {
-      font-family: var(--font-family);
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 1.25;
-      color: var(--black);
-    }
     &:not(:last-child) {
-      margin-bottom: 18px;
+      padding-bottom: 18px;
     }
-
     &.password {
       position: relative;
-      margin-bottom: 40px;
+      margin-bottom: 22px;
+    }
+    input {
+      background-color: transparent;
+      box-sizing: border-box;
+      min-width: 100%;
+      border: 1px solid var(--input-singIn);
+      border-radius: 12px;
+      padding: 15px;
+      padding-left: 18px;
+      line-height: 1.25;
+      font-weight: 400;
+      font-size: 16px;
+      &::placeholder {
+        font-family: var(--font-family);
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.25;
+        color: var(--black);
+      }
     }
   }
 }
