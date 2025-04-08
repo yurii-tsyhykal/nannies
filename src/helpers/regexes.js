@@ -6,3 +6,8 @@ export const AGE_REGEX =
 export const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 export const NAME_REGEX = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ'’\- ]+$/u;
 export const COMMENT_REGEX = /^[a-zA-Zа-яА-ЯіІїЇєЄґҐ0-9\s.,!?'"()\-\n\r]*$/u;
+
+export const LOWER_CASE_REGEX = /[a-z]/;
+export const UPPER_CASE_REGEX = /[A-Z]/;
+export const DIGIT_REGEX = /\d/;
+export const SYMBOL_REGEX = /[!@#$%^&*()_+\-=\\[\]{};':"|,.<>/?~`]/;

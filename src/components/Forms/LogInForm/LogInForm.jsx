@@ -9,6 +9,10 @@ import {
   selectAuthIsLoading,
   selectAuthUID,
 } from '../../../redux/auth/selectors';
+import clsx from 'clsx';
+import { yupResolver } from '@hookform/resolvers/yup';
+import loginFormSchemaOfValidation from '../../../utils/loginFormSchemaOfValidation';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const LogInForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -21,34 +25,31 @@ const LogInForm = ({ closeModal }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(loginFormSchemaOfValidation),
+  });
 
+  const onSubmit = data => {
+    dispatch(signIn(data));
+    closeModal();
+    if (uid && isAuthenticated) {
+      dispatch(getFavorites({ uid }));
+    }
+  };
   return (
-    <form
-      className={css.form}
-      onSubmit={handleSubmit(data => {
-        dispatch(signIn(data));
-        closeModal();
-        if (uid && isAuthenticated) {
-          dispatch(getFavorites({ uid }));
-        }
-      })}
-    >
+    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
       <h2 className={css.formTitle}>Log In</h2>
       <p className={css.formText}>
         Welcome back! Please enter your credentials to access your account and
         continue your babysitter search.
       </p>
-      <input
-        type="text"
-        placeholder="Email"
-        {...register('email', {
-          required: true,
-          min: 4,
-          pattern: /^\S+@\S+$/i,
-        })}
-      />
-      <label htmlFor={pwdId}>
+      <div className={css.errorWrapper}>
+        <input type="text" placeholder="Email" {...register('email')} />
+        {errors.email?.message && (
+          <ErrorMessage message={errors.email?.message} />
+        )}
+      </div>
+      <div className={clsx(css.password, css.errorWrapper)}>
         <svg
           width={20}
           height={20}
@@ -61,12 +62,14 @@ const LogInForm = ({ closeModal }) => {
         </svg>
         <input
           id={pwdId}
-          className={css.password}
           type={isOffEye ? 'password' : 'text'}
           placeholder="Password"
-          {...register('password', { required: true })}
+          {...register('password')}
         />
-      </label>
+        {errors.password?.message && (
+          <ErrorMessage message={errors.password?.message} />
+        )}
+      </div>
       <Button type="submit" variant="signUp-logIn-modals">
         Log In
       </Button>
