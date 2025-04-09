@@ -2,7 +2,7 @@ import Button from '../Button/Button';
 import css from './FormModal.module.css';
 import Modal from 'react-modal';
 
-Modal.setAppElement('#root');
+
 
 const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
   const customStyles = {

@@ -1,6 +1,5 @@
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import css from '../AuthForm.module.css';
-import { useId, useState } from 'react';
 import Button from '../../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../../redux/auth/operations';
@@ -11,22 +10,21 @@ import {
 } from '../../../redux/auth/selectors';
 import clsx from 'clsx';
 import { yupResolver } from '@hookform/resolvers/yup';
-import loginFormSchemaOfValidation from '../../../utils/loginFormSchemaOfValidation';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import logInFormSchemaOfValidation from '../../../utils/loginFormSchemaOfValidation';
+import Password from '../Password/Password';
 
 const LogInForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
   const isAuthenticated = useSelector(selectAuthIsLoading);
-  const [isOffEye, setIsOffEye] = useState(true);
-  const pwdId = useId();
-  const handleClick = () => setIsOffEye(!isOffEye);
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(loginFormSchemaOfValidation),
+    resolver: yupResolver(logInFormSchemaOfValidation),
   });
 
   const onSubmit = data => {
@@ -50,21 +48,10 @@ const LogInForm = ({ closeModal }) => {
         )}
       </div>
       <div className={clsx(css.password, css.errorWrapper)}>
-        <svg
-          width={20}
-          height={20}
-          onClick={handleClick}
-          className={css.eyeIcon}
-        >
-          <use
-            href={`/images/sprite.svg#${isOffEye ? 'eye-off' : 'eye'}`}
-          ></use>
-        </svg>
-        <input
-          id={pwdId}
-          type={isOffEye ? 'password' : 'text'}
-          placeholder="Password"
-          {...register('password')}
+        <Controller
+          name="password"
+          control={control}
+          render={({ field }) => <Password {...field} />}
         />
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />
