@@ -9,6 +9,7 @@ import { getNannies } from '../redux/nannies/operations';
 import NanniesList from '../components/NanniesList/NanniesList';
 import Button from '../components/Button/Button';
 import Filters from '../components/Filters/Filters';
+import InfoMessages from '../components/Messages/InfoMessages/InfoMessages';
 
 const NanniesPage = () => {
   const dispatch = useDispatch();
@@ -39,9 +40,9 @@ const NanniesPage = () => {
       {nannies.length ? (
         <NanniesList nannies={nannies} />
       ) : (
-        <p>We have not nannies now</p>
+        <InfoMessages message="We have not nannies now" />
       )}
-      {hasMore && (
+      {hasMore && nannies.length && (
         <Button type="button" variant="load-more" onClick={loadMore}>
           Load More
         </Button>

@@ -22,15 +22,11 @@ const Filters = ({ isFavPage }) => {
   const [selectedOption, setSelectedOption] = useState(defaultFilter);
 
   const handleChangeOnNannies = value => {
-    console.log('home');
-
     setSelectedOption(value);
     dispatch(setNannyFilter(value.value));
     dispatch(getNannies());
   };
   const handleChangeOnFavs = value => {
-    console.log('favs', value);
-
     setSelectedOption(value);
     dispatch(setFavFilter(value.value));
     dispatch(getFavorites({ uid }));

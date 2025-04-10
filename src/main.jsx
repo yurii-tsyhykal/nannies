@@ -14,7 +14,7 @@ initAuthListener();
 Modal.setAppElement('#root');
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <Provider store={store}>
       <PersistGate loading={<Loader />} persistor={persistor}>
         <BrowserRouter>
@@ -22,5 +22,5 @@ createRoot(document.getElementById('root')).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-  </StrictMode>
+  // </StrictMode>
 );

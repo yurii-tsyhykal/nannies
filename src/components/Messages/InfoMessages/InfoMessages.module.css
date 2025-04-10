@@ -1,0 +1,6 @@
+.infoMessage {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--black);
+  text-align: center;
+}
