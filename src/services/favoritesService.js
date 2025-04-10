@@ -16,18 +16,21 @@ export const getFavoritesNannies = async (
   const nannies = await get(createNanniesQuery(favRef, filter, lastKey, limit));
   if (nannies.exists()) {
     let data = [];
-     nannies.forEach(childSnapshot => {
-       data.push({
-         id: childSnapshot.key,
-         ...childSnapshot.val(),
-       });
-     });
+    nannies.forEach(childSnapshot => {
+      data.push({
+        id: childSnapshot.key,
+        ...childSnapshot.val(),
+      });
+    });
     if (
       (filter === 'z-to-a' || filter === 'popular') &&
       items.length > 0 &&
       lastKey
     ) {
+      console.log('favorites before data', data);
+
       data = data.filter(exists => exists.id !== lastKey.id);
+      console.log('favorites after data', data);
     }
     return data;
   }

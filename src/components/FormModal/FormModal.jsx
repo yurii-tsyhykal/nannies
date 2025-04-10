@@ -2,8 +2,6 @@ import Button from '../Button/Button';
 import css from './FormModal.module.css';
 import Modal from 'react-modal';
 
-
-
 const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
   const customStyles = {
     content: {
@@ -28,6 +26,7 @@ const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
     <Modal
       isOpen={modalIsOpen}
       onRequestClose={closeModal}
+      onAfterClose={() => document.body.classList.remove(css.modalOpen)}
       style={customStyles}
       bodyOpenClassName={css.modalOpen}
       contentLabel="Example Modal"

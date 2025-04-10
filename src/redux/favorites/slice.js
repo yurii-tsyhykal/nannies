@@ -42,10 +42,10 @@ const favoritesSlice = createSlice({
           state.lastKey = getLastKey(lastItem, state);
         }
         console.log('state.lastkey', state.lastKey);
-        console.log('payload', payload);
+        // console.log('payload', payload);
 
         state.items = [...state.items, ...payload];
-        console.log('state.items', state.items);
+        // console.log('state.items', state.items);
       })
       .addCase(toggleFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
