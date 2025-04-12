@@ -2,10 +2,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  &.submit {
+    max-height: 52px;
+  }
 }
 .posCenter {
-  /* top: calc(50% - 40px);
-  left: calc(50% - 40px); */
+  top: calc(50% - 40px);
+  left: calc(50% - 40px);
 }
 
 .loader {

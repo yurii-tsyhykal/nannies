@@ -2,9 +2,9 @@ import { Controller, useForm } from 'react-hook-form';
 import css from '../AuthForm.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../Button/Button';
-import { registerNewUser } from '../../../services/registerNewUser';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  selectAuthError,
   selectAuthIsLoading,
   selectAuthUID,
 } from '../../../redux/auth/selectors';
@@ -13,25 +13,46 @@ import signUpFormSchemaOfValidation from '../../../utils/signUpFormSchemaOfValid
 import clsx from 'clsx';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Password from '../Password/Password';
+import { signUp } from '../../../redux/auth/operations';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import Loader from '../../Loader/Loader';
+import { clearAuthError } from '../../../redux/auth/slice';
 
 const SignUpForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
-  const isAuthenticated = useSelector(selectAuthIsLoading);
+  const isLoading = useSelector(selectAuthIsLoading);
+  const authError = useSelector(selectAuthError);
+
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(signUpFormSchemaOfValidation),
   });
 
-  const onSubmit = data => {
-    registerNewUser(data);
-    closeModal();
-    if (uid && isAuthenticated) {
-      dispatch(getFavorites({ uid }));
+  useEffect(() => {
+    if (authError) {
+      toast.error(authError);
+      dispatch(clearAuthError());
+    }
+  }, [authError, dispatch]);
+
+  const onSubmit = async data => {
+    try {
+      const result = await dispatch(signUp(data));
+      if (signUp.fulfilled.match(result)) {
+        toast.success('Successfully registered! Welcome!');
+        reset();
+        closeModal();
+        dispatch(getFavorites({ uid }));
+      }
+    } catch {
+      toast.error('An unexpected error occurred.');
     }
   };
   return (
@@ -68,9 +89,13 @@ const SignUpForm = ({ closeModal }) => {
           <ErrorMessage message={errors.password?.message} />
         )}
       </div>
-      <Button type="submit" variant="signUp-logIn-modals">
-        Sign Up
-      </Button>
+      {isLoading ? (
+        <Loader variant="submit" />
+      ) : (
+        <Button type="submit" variant="signUp-logIn-modals">
+          Sign Up
+        </Button>
+      )}
     </form>
   );
 };

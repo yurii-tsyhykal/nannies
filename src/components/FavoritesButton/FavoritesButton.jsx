@@ -8,18 +8,19 @@ import {
 } from '../../redux/auth/selectors';
 import { selectFavNannies } from '../../redux/favorites/selectors';
 import { toggleFavorites } from '../../redux/favorites/operations';
+import { toast } from 'react-toastify';
 
 const FavoritesButton = ({ nanny }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const favorites = useSelector(selectFavNannies);
-  
 
   const isFavorite = favorites.some(item => item.id === nanny.id);
 
   const handleClick = () => {
-    if (!uid || !isAuthenticated) return alert('login or registration');
+    if (!uid || !isAuthenticated)
+      return toast.info('Please log in or register to add favorites.');
     dispatch(toggleFavorites({ uid, nanny }));
   };
   return (

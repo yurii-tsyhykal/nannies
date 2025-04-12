@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 import {
+  MAX_ERROR_MESSAGE,
   PASSWORD_LOWER_CASE,
   PASSWORD_MIN_ERROR_MESSAGE,
   PASSWORD_NUMBER,
@@ -26,6 +27,7 @@ export const passwordValidationSchema = Yup.string()
   .trim()
   .required(errorMessages.required)
   .min(8, errorMessages.minLength)
+  .max(30, MAX_ERROR_MESSAGE)
   .test('has-lowercase', errorMessages.lowerCase, value =>
     LOWER_CASE_REGEX.test(value || '')
   )
