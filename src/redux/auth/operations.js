@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { registerNewUser } from '../../services/registerNewUser';
 import { authLogInUser } from '../../services/authLogInUser';
+import { mapAuthErrorCodeToMessage } from '../../helpers/mapAuthErrorCodeToMessage';
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
@@ -9,7 +10,8 @@ export const signUp = createAsyncThunk(
       const user = await registerNewUser(userData);
       return user;
     } catch (error) {
-      return thunkApi.rejectWithValue(error.message);
+      const message = mapAuthErrorCodeToMessage(error);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );

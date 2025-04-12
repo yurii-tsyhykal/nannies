@@ -18,10 +18,6 @@ export const registerNewUser = async ({ name, email, password }) => {
       uid: user.uid,
     };
   } catch (error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorCode);
-    console.log(errorMessage);
-    throw error;
+    throw error.code;
   }
 };
