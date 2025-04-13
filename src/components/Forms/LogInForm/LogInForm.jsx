@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../../redux/auth/operations';
 import { getFavorites } from '../../../redux/favorites/operations';
 import {
+  selectAuthError,
   selectAuthIsLoading,
   selectAuthUID,
 } from '../../../redux/auth/selectors';
@@ -13,25 +14,44 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import logInFormSchemaOfValidation from '../../../utils/loginFormSchemaOfValidation';
 import Password from '../Password/Password';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import { clearAuthError } from '../../../redux/auth/slice';
+import Loader from '../../Loader/Loader';
 
 const LogInForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const uid = useSelector(selectAuthUID);
-  const isAuthenticated = useSelector(selectAuthIsLoading);
+  const isLoading = useSelector(selectAuthIsLoading);
+  const authError = useSelector(selectAuthError);
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(logInFormSchemaOfValidation),
   });
 
-  const onSubmit = data => {
-    dispatch(signIn(data));
-    closeModal();
-    if (uid && isAuthenticated) {
-      dispatch(getFavorites({ uid }));
+  useEffect(() => {
+    if (authError) {
+      toast.error(authError);
+      dispatch(clearAuthError());
+    }
+  }, [authError, dispatch]);
+
+  const onSubmit = async data => {
+    try {
+      const result = await dispatch(signIn(data));
+      if (signIn.fulfilled.match(result)) {
+        toast.success('Login successful! Welcome back!');
+        reset();
+        closeModal();
+        dispatch(getFavorites({ uid }));
+      }
+    } catch {
+      toast.error('An unexpected error occurred.');
     }
   };
   return (
@@ -57,9 +77,13 @@ const LogInForm = ({ closeModal }) => {
           <ErrorMessage message={errors.password?.message} />
         )}
       </div>
-      <Button type="submit" variant="signUp-logIn-modals">
-        Log In
-      </Button>
+      {isLoading ? (
+        <Loader variant="submit" />
+      ) : (
+        <Button type="submit" variant="signUp-logIn-modals">
+          Log In
+        </Button>
+      )}
     </form>
   );
 };

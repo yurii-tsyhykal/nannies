@@ -24,7 +24,8 @@ export const signIn = createAsyncThunk(
       console.log('thunk user', userData);
       return user;
     } catch (error) {
-      console.log(thunkApi.rejectWithValue(error.message));
+      const message = mapAuthErrorCodeToMessage(error);
+      return thunkApi.rejectWithValue(message);
     }
   }
 );
