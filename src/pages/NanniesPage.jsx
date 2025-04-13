@@ -37,7 +37,7 @@ const NanniesPage = () => {
   return (
     <>
       <Filters />
-      {nannies.length ? (
+      {nannies.length > 0 ? (
         <NanniesList nannies={nannies} />
       ) : (
         <InfoMessages message="We have not nannies now" />
