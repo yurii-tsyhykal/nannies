@@ -42,11 +42,23 @@ const Header = ({ type }) => {
                 <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <NavLink to="nannies">Nannies</NavLink>
+                <NavLink
+                  className={({ isActive }) => clsx(isActive && css.activeLink)}
+                  to="nannies"
+                >
+                  Nannies
+                </NavLink>
               </li>
               {!type && isAuthenticated && (
                 <li>
-                  <NavLink to="favorites">Favorites</NavLink>
+                  <NavLink
+                    className={({ isActive }) =>
+                      clsx(isActive && css.activeLink)
+                    }
+                    to="favorites"
+                  >
+                    Favorites
+                  </NavLink>
                 </li>
               )}
             </ul>
@@ -65,7 +77,9 @@ const Header = ({ type }) => {
               <Button
                 type="button"
                 variant="registration"
-                onClick={() => openModal(<SignUpForm closeModal={closeModal} />)}
+                onClick={() =>
+                  openModal(<SignUpForm closeModal={closeModal} />)
+                }
               >
                 Registration
               </Button>

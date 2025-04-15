@@ -30,7 +30,7 @@ export const NAME_REQUIRED = 'Name is required';
 export const NAME_REGEX_ERROR_MESSAGE = 'Enter a valid name';
 export const NAME_MIN_ERROR_MESSAGE = 'At least 2 letters';
 
-export const COMMENT_REGEX_ERROR_MESSAGE = 'Enter a valid name';
+export const COMMENT_REGEX_ERROR_MESSAGE = 'Enter a valid symbols';
 export const COMMENT_MIN_ERROR_MESSAGE = 'This field cannot be empty';
 
 export const PASSWORD_REQUIRED = 'Password is required';

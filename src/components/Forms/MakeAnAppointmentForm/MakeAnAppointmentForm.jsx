@@ -6,20 +6,43 @@ import Button from '../../Button/Button';
 import appointmentFormSchemaOfValidation from '../../../utils/appointmentFormSchemaOfValidation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import Loader from '../../Loader/Loader';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
+import {
+  selectAuthUID,
+  selectIsAuthenticated,
+} from '../../../redux/auth/selectors';
 
 const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const uid = useSelector(selectAuthUID);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   const {
     register,
     handleSubmit,
     control,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(appointmentFormSchemaOfValidation),
   });
 
-  const onSubmit = data => {
-    console.log(data);
-    closeModal();
+  const onSubmit = () => {
+    if (!uid && !isAuthenticated) {
+      toast.warn('Please log in to make an appointment.');
+      return;
+    }
+    setIsSubmitting(true);
+    setTimeout(() => {
+      toast.success(
+        `Your appointment request with ${nanny.name} has been sent!`
+      );
+      setIsSubmitting(false);
+      reset();
+      closeModal();
+    }, 1500);
   };
 
   return (
@@ -48,19 +71,22 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
         <div className={css.errorWrapper}>
           <input type="text" placeholder="Address" {...register('address')} />
           {errors.address?.message && (
-            <ErrorMessage message={errors.address?.message} />
+            <ErrorMessage
+              message={errors.address?.message}
+              variant="appointment"
+            />
           )}
         </div>
         <div className={css.errorWrapper}>
           <input type="tel" placeholder="+380" {...register('tel')} />
           {errors.tel?.message && (
-            <ErrorMessage message={errors.tel?.message} />
+            <ErrorMessage message={errors.tel?.message} variant="appointment" />
           )}
         </div>
         <div className={css.errorWrapper}>
           <input type="text" placeholder="Child's Age" {...register('age')} />
           {errors.age?.message && (
-            <ErrorMessage message={errors.age?.message} />
+            <ErrorMessage message={errors.age?.message} variant="appointment" />
           )}
         </div>
         <div className={css.errorWrapper}>
@@ -71,7 +97,10 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
             render={({ field }) => <SingleListTimePicker {...field} />}
           />
           {errors.time?.message && (
-            <ErrorMessage message={errors.time?.message} />
+            <ErrorMessage
+              message={errors.time?.message}
+              variant="appointment"
+            />
           )}
         </div>
       </div>
@@ -91,7 +120,7 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
           <ErrorMessage message={errors.name?.message} />
         )}
       </div>
-      <div className={css.errorWrapper}>
+      <div className={clsx(css.errorWrapper, css.commentWrapper)}>
         <textarea
           type="text"
           placeholder="Comment"
@@ -102,9 +131,13 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
           <ErrorMessage message={errors.comment?.message} />
         )}
       </div>
-      <Button type="submit" variant="send-app">
-        Send
-      </Button>
+      {isSubmitting ? (
+        <Loader variant="submit" />
+      ) : (
+        <Button type="submit" variant="send-app">
+          Send
+        </Button>
+      )}
     </form>
   );
 };

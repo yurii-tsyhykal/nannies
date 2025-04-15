@@ -29,9 +29,23 @@
 
 .form.formAp {
   max-width: 600px;
+
   input {
     max-width: 472px;
     &:not(:last-child) {
+      margin-bottom: 0;
+    }
+  }
+  .inputWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 8px;
+    row-gap: 16px;
+    margin-bottom: 16px;
+    input {
+      min-width: 232px;
+      width: 100%;
       margin-bottom: 0;
     }
   }
@@ -40,6 +54,7 @@
     &:not(:last-child) {
       padding-bottom: 0;
     }
+
     &:nth-child(n + 5) {
       display: block;
       padding-bottom: 16px;
@@ -59,24 +74,13 @@
       padding: 16px 18px;
       font-size: inherit;
       line-height: 1.25;
-      margin-bottom: 40px;
       &::placeholder {
         color: inherit;
       }
     }
   }
 
-  .inputWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    column-gap: 8px;
-    row-gap: 16px;
-    margin-bottom: 16px;
-    input {
-      min-width: 232px;
-      width: 100%;
-      margin-bottom: 0;
-    }
+  .commentWrapper {
+    margin-bottom: 40px;
   }
 }
