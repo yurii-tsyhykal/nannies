@@ -24,6 +24,7 @@ const LogInForm = ({ closeModal }) => {
   const uid = useSelector(selectAuthUID);
   const isLoading = useSelector(selectAuthIsLoading);
   const authError = useSelector(selectAuthError);
+
   const {
     register,
     handleSubmit,

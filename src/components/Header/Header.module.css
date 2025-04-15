@@ -21,9 +21,25 @@
     .navList {
       display: flex;
       column-gap: 40px;
-      li > a {
-        line-height: 1.25;
-        color: var(--main);
+      li {
+        & > a {
+          line-height: 1.25;
+          color: var(--main);
+        }
+
+        .activeLink {
+          position: relative;
+          &::after {
+            content: '';
+            background-color: white;
+            position: absolute;
+            bottom: -12px;
+            right: 45%;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+          }
+        }
       }
     }
   }
@@ -45,6 +61,8 @@
   left: 0;
   right: 0;
   background-color: var(--background);
+  padding-left: 128px;
+  padding-right: 128px;
 }
 
 .navWrapper {
