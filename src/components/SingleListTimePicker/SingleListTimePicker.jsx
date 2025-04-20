@@ -53,7 +53,7 @@ const MenuListWithTitle = props => (
 );
 
 const SingleListTimePicker = forwardRef(function SingleListTimePicker(
-  { value, onChange, name, ...rest },
+  { value, onChange, name, error, ...rest },
   ref
 ) {
   const findOptionByValue = val => {
@@ -74,6 +74,7 @@ const SingleListTimePicker = forwardRef(function SingleListTimePicker(
       components={{ Control: ControlWithIcon, MenuList: MenuListWithTitle }}
       placeholder="00 : 00"
       isSearchable={false}
+      error={error}
       ref={ref}
       {...rest}
     />

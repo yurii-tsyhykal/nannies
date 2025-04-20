@@ -29,6 +29,8 @@
 
 .form.formAp {
   max-width: 600px;
+  padding-left: 50px;
+  padding-right: 50px;
 
   input {
     max-width: 472px;
@@ -36,51 +38,61 @@
       margin-bottom: 0;
     }
   }
-  .inputWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    column-gap: 8px;
-    row-gap: 16px;
-    margin-bottom: 16px;
-    input {
-      min-width: 232px;
-      width: 100%;
-      margin-bottom: 0;
+  .scrollWrapper {
+    max-height: 200px;
+    overflow: auto;
+    padding-right: 5px;
+    .inputWrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      column-gap: 8px;
+      row-gap: 16px;
+      margin-bottom: 16px;
+      input {
+        min-width: 232px;
+        width: 100%;
+        margin-bottom: 0;
+      }
     }
-  }
-  .errorWrapper {
-    min-width: 0;
-    &:not(:last-child) {
-      padding-bottom: 0;
-    }
+    .errorWrapper {
+      min-width: 0;
+      &:not(:last-child) {
+        padding-bottom: 0;
+      }
 
-    &:nth-child(n + 5) {
-      display: block;
-      padding-bottom: 16px;
-    }
-
-    textarea {
-      box-sizing: border-box;
-      display: block;
-      font-family: var(--font-family);
-      color: inherit;
-      font-weight: inherit;
-      resize: none;
-      max-width: 472px;
-      width: 100%;
-      border-color: var(--input-singIn);
-      border-radius: 12px;
-      padding: 16px 18px;
-      font-size: inherit;
-      line-height: 1.25;
-      &::placeholder {
+      &:nth-child(n + 5) {
+        display: block;
+        padding-bottom: 16px;
+      }
+      &.commentWrapper {
+        margin-bottom: 40px;
+      }
+      textarea {
+        box-sizing: border-box;
+        display: block;
+        font-family: var(--font-family);
         color: inherit;
+        font-weight: inherit;
+        resize: none;
+        width: 100%;
+        border-color: var(--input-singIn);
+        border-radius: 12px;
+        padding: 16px 18px;
+        font-size: inherit;
+        line-height: 1.25;
+        &::placeholder {
+          color: inherit;
+        }
+      }
+
+      .textareaError {
+        border-color: var(--error);
       }
     }
   }
-
-  .commentWrapper {
-    margin-bottom: 40px;
+  .scrollWrapper > .errorWrapper:nth-child(n + 2) {
+    display: block;
+    padding-bottom: 16px;
   }
 }
