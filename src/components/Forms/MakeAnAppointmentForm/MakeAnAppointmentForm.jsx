@@ -14,6 +14,7 @@ import {
   selectAuthUID,
   selectIsAuthenticated,
 } from '../../../redux/auth/selectors';
+import Email from '../Email/Email';
 
 const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -67,69 +68,105 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
         <p>Your nanny</p>
         <h3 className={css.nannyName}>{nanny.name}</h3>
       </div>
-      <div className={css.inputWrapper}>
-        <div className={css.errorWrapper}>
-          <input type="text" placeholder="Address" {...register('address')} />
-          {errors.address?.message && (
-            <ErrorMessage
-              message={errors.address?.message}
-              variant="appointment"
+      <div className={css.scrollWrapper}>
+        <div className={css.inputWrapper}>
+          <div className={css.errorWrapper}>
+            <input
+              className={errors.address ? css.error : ''}
+              type="text"
+              placeholder="Address"
+              {...register('address')}
             />
-          )}
-        </div>
-        <div className={css.errorWrapper}>
-          <input type="tel" placeholder="+380" {...register('tel')} />
-          {errors.tel?.message && (
-            <ErrorMessage message={errors.tel?.message} variant="appointment" />
-          )}
-        </div>
-        <div className={css.errorWrapper}>
-          <input type="text" placeholder="Child's Age" {...register('age')} />
-          {errors.age?.message && (
-            <ErrorMessage message={errors.age?.message} variant="appointment" />
-          )}
+            {errors.address?.message && (
+              <ErrorMessage
+                message={errors.address?.message}
+                variant="appointment"
+              />
+            )}
+          </div>
+          <div className={css.errorWrapper}>
+            <input
+              className={errors.tel ? css.error : ''}
+              type="tel"
+              placeholder="+380"
+              {...register('tel')}
+            />
+            {errors.tel?.message && (
+              <ErrorMessage
+                message={errors.tel?.message}
+                variant="appointment"
+              />
+            )}
+          </div>
+          <div className={css.errorWrapper}>
+            <input
+              className={errors.age ? css.error : ''}
+              type="text"
+              placeholder="Child's Age"
+              {...register('age')}
+            />
+            {errors.age?.message && (
+              <ErrorMessage
+                message={errors.age?.message}
+                variant="appointment"
+              />
+            )}
+          </div>
+          <div className={css.errorWrapper}>
+            <Controller
+              name="time"
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <SingleListTimePicker {...field} error={!!errors.time} />
+              )}
+            />
+            {errors.time?.message && (
+              <ErrorMessage
+                message={errors.time?.message}
+                variant="appointment"
+              />
+            )}
+          </div>
         </div>
         <div className={css.errorWrapper}>
           <Controller
-            name="time"
+            name="email"
             control={control}
-            rules={{ required: true }}
-            render={({ field }) => <SingleListTimePicker {...field} />}
+            render={({ field }) => (
+              <Email
+                {...field}
+                errorClassName={errors.email ? css.error : ''}
+              />
+            )}
           />
-          {errors.time?.message && (
-            <ErrorMessage
-              message={errors.time?.message}
-              variant="appointment"
-            />
+          {errors.email?.message && (
+            <ErrorMessage message={errors.email?.message} />
           )}
         </div>
-      </div>
-      <div className={css.errorWrapper}>
-        <input type="text" placeholder="Email" {...register('email')} />
-        {errors.email?.message && (
-          <ErrorMessage message={errors.email?.message} />
-        )}
-      </div>
-      <div className={css.errorWrapper}>
-        <input
-          type="text"
-          placeholder="Father's or mother's name"
-          {...register('name')}
-        />
-        {errors.name?.message && (
-          <ErrorMessage message={errors.name?.message} />
-        )}
-      </div>
-      <div className={clsx(css.errorWrapper, css.commentWrapper)}>
-        <textarea
-          type="text"
-          placeholder="Comment"
-          rows={4}
-          {...register('comment')}
-        ></textarea>
-        {errors.comment?.message && (
-          <ErrorMessage message={errors.comment?.message} />
-        )}
+        <div className={css.errorWrapper}>
+          <input
+            className={errors.name ? css.error : ''}
+            type="text"
+            placeholder="Father's or mother's name"
+            {...register('name')}
+          />
+          {errors.name?.message && (
+            <ErrorMessage message={errors.name?.message} />
+          )}
+        </div>
+        <div className={clsx(css.errorWrapper, css.commentWrapper)}>
+          <textarea
+            className={errors.comment ? css.textareaError : ''}
+            type="text"
+            placeholder="Comment"
+            rows={4}
+            {...register('comment')}
+          ></textarea>
+          {errors.comment?.message && (
+            <ErrorMessage message={errors.comment?.message} />
+          )}
+        </div>
       </div>
       {isSubmitting ? (
         <Loader variant="submit" />

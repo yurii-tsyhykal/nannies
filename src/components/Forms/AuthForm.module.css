@@ -16,10 +16,6 @@
     color: rgba(17, 16, 28, 0.5);
     margin-bottom: 40px;
   }
-  .password {
-    display: block;
-    position: relative;
-  }
   .errorWrapper {
     position: relative;
     display: inline-block;
@@ -49,6 +45,9 @@
         line-height: 1.25;
         color: var(--black);
       }
+    }
+    .error {
+      border-color: var(--error);
     }
   }
 }

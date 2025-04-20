@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { clearAuthError } from '../../../redux/auth/slice';
 import Loader from '../../Loader/Loader';
+import Email from '../Email/Email';
 
 const LogInForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -26,7 +27,6 @@ const LogInForm = ({ closeModal }) => {
   const authError = useSelector(selectAuthError);
 
   const {
-    register,
     handleSubmit,
     control,
     reset,
@@ -63,7 +63,13 @@ const LogInForm = ({ closeModal }) => {
         continue your babysitter search.
       </p>
       <div className={css.errorWrapper}>
-        <input type="text" placeholder="Email" {...register('email')} />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <Email {...field} errorClassName={errors.email ? css.error : ''} />
+          )}
+        />
         {errors.email?.message && (
           <ErrorMessage message={errors.email?.message} />
         )}
@@ -72,7 +78,12 @@ const LogInForm = ({ closeModal }) => {
         <Controller
           name="password"
           control={control}
-          render={({ field }) => <Password {...field} />}
+          render={({ field }) => (
+            <Password
+              {...field}
+              errorClassName={errors.password ? css.error : ''}
+            />
+          )}
         />
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />

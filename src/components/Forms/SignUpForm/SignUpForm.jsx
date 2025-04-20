@@ -18,6 +18,7 @@ import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import Loader from '../../Loader/Loader';
 import { clearAuthError } from '../../../redux/auth/slice';
+import Email from '../Email/Email';
 
 const SignUpForm = ({ closeModal }) => {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ const SignUpForm = ({ closeModal }) => {
       </p>
       <div className={css.errorWrapper}>
         <input
-          className={css.name}
+          className={clsx(css.name, errors.name ? css.error : '')}
           type="text"
           placeholder="Name"
           {...register('name')}
@@ -74,7 +75,13 @@ const SignUpForm = ({ closeModal }) => {
         )}
       </div>
       <div className={css.errorWrapper}>
-        <input type="text" placeholder="Email" {...register('email')} />
+        <Controller
+          name="email"
+          control={control}
+          render={({ field }) => (
+            <Email {...field} errorClassName={errors.email ? css.error : ''} />
+          )}
+        />
         {errors.email?.message && (
           <ErrorMessage message={errors.email?.message} />
         )}
@@ -83,7 +90,12 @@ const SignUpForm = ({ closeModal }) => {
         <Controller
           name="password"
           control={control}
-          render={({ field }) => <Password {...field} />}
+          render={({ field }) => (
+            <Password
+              {...field}
+              errorClassName={errors.password ? css.error : ''}
+            />
+          )}
         />
         {errors.password?.message && (
           <ErrorMessage message={errors.password?.message} />

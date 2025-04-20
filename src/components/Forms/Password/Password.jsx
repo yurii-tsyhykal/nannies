@@ -1,10 +1,11 @@
+import clsx from 'clsx';
 import css from './Password.module.css';
 import { forwardRef, useState } from 'react';
 
 const Password = forwardRef(function Password(props, ref) {
   const [isOffEye, setIsOffEye] = useState(true);
 
-  const { name, value, onChange, ...rest } = props;
+  const { name, value, onChange, errorClassName, ...rest } = props;
   const handleClick = () => setIsOffEye(!isOffEye);
   return (
     <>
@@ -15,7 +16,7 @@ const Password = forwardRef(function Password(props, ref) {
         value={value || ''}
         name={name}
         onChange={onChange}
-        className={css.password}
+        className={clsx(css.password, errorClassName)}
         type={isOffEye ? 'password' : 'text'}
         placeholder="Password"
         ref={ref}
