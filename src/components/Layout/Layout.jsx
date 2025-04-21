@@ -17,7 +17,7 @@ const Layout = () => {
 
   useEffect(() => {
     if (uid) {
-      dispatch(getFavorites({ uid }));
+      dispatch(getFavorites({ uid }));      
     }
   }, [dispatch, uid]);
 

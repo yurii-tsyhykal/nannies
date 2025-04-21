@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { registerNewUser } from '../../services/registerNewUser';
 import { authLogInUser } from '../../services/authLogInUser';
 import { mapAuthErrorCodeToMessage } from '../../helpers/mapAuthErrorCodeToMessage';
+import { logOutUser } from '../../services/logOutUser';
+import { clearFavState } from '../favorites/slice';
 
 export const signUp = createAsyncThunk(
   'auth/signUp',
@@ -29,3 +31,13 @@ export const signIn = createAsyncThunk(
     }
   }
 );
+
+export const logOut = createAsyncThunk('auth/logOut', async (_, thunkApi) => {
+  try {
+    await logOutUser();
+    thunkApi.dispatch(clearFavState());
+  } catch (error) {
+    const message = mapAuthErrorCodeToMessage(error);
+    return thunkApi.rejectWithValue(message || 'Logout failed');
+  }
+});

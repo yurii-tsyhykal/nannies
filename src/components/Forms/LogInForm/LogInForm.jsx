@@ -3,11 +3,9 @@ import css from '../AuthForm.module.css';
 import Button from '../../Button/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from '../../../redux/auth/operations';
-import { getFavorites } from '../../../redux/favorites/operations';
 import {
   selectAuthError,
   selectAuthIsLoading,
-  selectAuthUID,
 } from '../../../redux/auth/selectors';
 import clsx from 'clsx';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -19,10 +17,10 @@ import { useEffect } from 'react';
 import { clearAuthError } from '../../../redux/auth/slice';
 import Loader from '../../Loader/Loader';
 import Email from '../Email/Email';
+import { TOAST_MESSAGES } from '../../../helpers/constants';
 
 const LogInForm = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const uid = useSelector(selectAuthUID);
   const isLoading = useSelector(selectAuthIsLoading);
   const authError = useSelector(selectAuthError);
 
@@ -46,13 +44,12 @@ const LogInForm = ({ closeModal }) => {
     try {
       const result = await dispatch(signIn(data));
       if (signIn.fulfilled.match(result)) {
-        toast.success('Login successful! Welcome back!');
+        toast.success(TOAST_MESSAGES.LOGIN);
         reset();
         closeModal();
-        dispatch(getFavorites({ uid }));
       }
     } catch {
-      toast.error('An unexpected error occurred.');
+      toast.error(TOAST_MESSAGES.UNEXPECTED);
     }
   };
   return (
