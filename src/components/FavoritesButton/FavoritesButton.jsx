@@ -9,6 +9,7 @@ import {
 import { selectFavNannies } from '../../redux/favorites/selectors';
 import { toggleFavorites } from '../../redux/favorites/operations';
 import { toast } from 'react-toastify';
+import { TOAST_MESSAGES } from '../../helpers/constants';
 
 const FavoritesButton = ({ nanny }) => {
   const dispatch = useDispatch();
@@ -19,8 +20,7 @@ const FavoritesButton = ({ nanny }) => {
   const isFavorite = favorites.some(item => item.id === nanny.id);
 
   const handleClick = () => {
-    if (!uid || !isAuthenticated)
-      return toast.info('Please log in or register to add favorites.');
+    if (!uid || !isAuthenticated) return toast.warn(TOAST_MESSAGES.FAV_BUTTON);
     dispatch(toggleFavorites({ uid, nanny }));
   };
   return (

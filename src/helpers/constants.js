@@ -8,6 +8,17 @@ export const OPTIONS = [
   { value: 'all', label: 'Show all' },
 ];
 
+export const TOAST_MESSAGES = {
+  LOGOUT: 'You have been successfully logged out!',
+  FAV_BUTTON: 'Please log in or register to add favorites.',
+  LOGIN: 'Login successful! Welcome back!',
+  UNEXPECTED: 'An unexpected error occurred.',
+  MAKE_AN_APPOINTMENT: 'Please log in to make an appointment.',
+  APPOINTMENT_WITH_NAME: name =>
+    `Your appointment request with ${name} has been sent!`,
+  REGISTERED: 'Successfully registered! Welcome!',
+};
+
 export const MAX_ERROR_MESSAGE = 'Max 50 characters.';
 
 export const ADDRESS_REQUIRED = 'Address is required';

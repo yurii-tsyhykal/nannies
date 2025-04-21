@@ -15,6 +15,7 @@ import {
   selectIsAuthenticated,
 } from '../../../redux/auth/selectors';
 import Email from '../Email/Email';
+import { TOAST_MESSAGES } from '../../../helpers/constants';
 
 const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -32,14 +33,12 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
 
   const onSubmit = () => {
     if (!uid && !isAuthenticated) {
-      toast.warn('Please log in to make an appointment.');
+      toast.warn(TOAST_MESSAGES.MAKE_AN_APPOINTMENT);
       return;
     }
     setIsSubmitting(true);
     setTimeout(() => {
-      toast.success(
-        `Your appointment request with ${nanny.name} has been sent!`
-      );
+      toast.success(TOAST_MESSAGES.APPOINTMENT_WITH_NAME(nanny.name));
       setIsSubmitting(false);
       reset();
       closeModal();

@@ -6,9 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectAuthError,
   selectAuthIsLoading,
-  selectAuthUID,
 } from '../../../redux/auth/selectors';
-import { getFavorites } from '../../../redux/favorites/operations';
 import signUpFormSchemaOfValidation from '../../../utils/signUpFormSchemaOfValidation';
 import clsx from 'clsx';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -19,10 +17,10 @@ import { useEffect } from 'react';
 import Loader from '../../Loader/Loader';
 import { clearAuthError } from '../../../redux/auth/slice';
 import Email from '../Email/Email';
+import { TOAST_MESSAGES } from '../../../helpers/constants';
 
 const SignUpForm = ({ closeModal }) => {
   const dispatch = useDispatch();
-  const uid = useSelector(selectAuthUID);
   const isLoading = useSelector(selectAuthIsLoading);
   const authError = useSelector(selectAuthError);
 
@@ -47,13 +45,12 @@ const SignUpForm = ({ closeModal }) => {
     try {
       const result = await dispatch(signUp(data));
       if (signUp.fulfilled.match(result)) {
-        toast.success('Successfully registered! Welcome!');
+        toast.success(TOAST_MESSAGES.REGISTERED);
         reset();
         closeModal();
-        dispatch(getFavorites({ uid }));
       }
     } catch {
-      toast.error('An unexpected error occurred.');
+      toast.error(TOAST_MESSAGES.UNEXPECTED);
     }
   };
   return (

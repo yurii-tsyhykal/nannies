@@ -1,14 +1,22 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button/Button';
 import css from './UserMenu.module.css';
 import { selectAuthUser } from '../../redux/auth/selectors';
-import { logOutUser } from '../../services/logOutUser';
+import { logOut } from '../../redux/auth/operations';
+import { toast } from 'react-toastify';
+import { TOAST_MESSAGES } from '../../helpers/constants';
 
 const UserMenu = () => {
+  const dispatch = useDispatch();
   const user = useSelector(selectAuthUser);
 
   const handleLogOut = async () => {
-    await logOutUser();
+    try {
+      await dispatch(logOut()).unwrap();
+      toast.success(TOAST_MESSAGES.LOGOUT);
+    } catch (error) {
+      toast.error(error);
+    }
   };
   return (
     <div className={css.userMenuWrapper}>
@@ -17,7 +25,7 @@ const UserMenu = () => {
           <use href="/images/sprite.svg#user-default-icon"></use>
         </svg>
       </div>
-      <p className={css.userName}>{user.username}</p>
+      <p className={css.userName}>{user?.username}</p>
       <Button type="button" variant="logOut" onClick={handleLogOut}>
         Log out
       </Button>

@@ -9,10 +9,8 @@ export const registerNewUser = async ({ name, email, password }) => {
       password
     );
     const user = userCredential.user;
-    console.log(userCredential);
-    console.log(userCredential.user);
-    await updateProfile(user, { displayName: name });
 
+    await updateProfile(user, { displayName: name });
     return {
       username: user.displayName,
       uid: user.uid,
