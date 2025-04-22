@@ -27,10 +27,7 @@ export const getFavoritesNannies = async (
       items.length > 0 &&
       lastKey
     ) {
-      console.log('favorites before data', data);
-
       data = data.filter(exists => exists.id !== lastKey.id);
-      console.log('favorites after data', data);
     }
     return data;
   }
