@@ -39,9 +39,10 @@
     }
   }
   .scrollWrapper {
-    max-height: 200px;
+    max-height: 350px;
     overflow: auto;
     padding-right: 5px;
+    margin-bottom: 36px;
     .inputWrapper {
       display: flex;
       flex-wrap: wrap;
@@ -64,9 +65,6 @@
       &:nth-child(n + 5) {
         display: block;
         padding-bottom: 16px;
-      }
-      &.commentWrapper {
-        margin-bottom: 40px;
       }
       textarea {
         box-sizing: border-box;

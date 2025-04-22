@@ -51,23 +51,24 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className={css.formTitle}>Make an appointment with a babysitter</h2>
-      <p className={css.formText}>
-        Arranging a meeting with a caregiver for your child is the first step to
-        creating a safe and comfortable environment. Fill out the form below so
-        we can match you with the perfect care partner.
-      </p>
-      <div className={css.nanny}>
-        <img
-          className={css.nannyAvatar}
-          src={nanny.url}
-          alt="Nanny's avatar"
-          width={44}
-          height={44}
-        />
-        <p>Your nanny</p>
-        <h3 className={css.nannyName}>{nanny.name}</h3>
-      </div>
       <div className={css.scrollWrapper}>
+        <p className={css.formText}>
+          Arranging a meeting with a caregiver for your child is the first step
+          to creating a safe and comfortable environment. Fill out the form
+          below so we can match you with the perfect care partner.
+        </p>
+        <div className={css.nanny}>
+          <img
+            className={css.nannyAvatar}
+            src={nanny.url}
+            alt="Nanny's avatar"
+            width={44}
+            height={44}
+          />
+          <p>Your nanny</p>
+          <h3 className={css.nannyName}>{nanny.name}</h3>
+        </div>
+
         <div className={css.inputWrapper}>
           <div className={css.errorWrapper}>
             <input
