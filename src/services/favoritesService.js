@@ -1,4 +1,4 @@
-import { get, ref, set } from 'firebase/database';
+import { get, ref, runTransaction } from 'firebase/database';
 import { db } from './firebaseConfig';
 import createNanniesQuery from '../helpers/createNanniesQuery';
 
@@ -36,13 +36,27 @@ export const getFavoritesNannies = async (
 
 export const toggleFavorite = async (uid, nanny) => {
   const favRef = ref(db, `users/${uid}/favorites`);
-  let favoritesArray = await getFavoritesNannies(uid);
-  const exists = favoritesArray.some(item => item.id === nanny.id);
-  if (exists) {
-    favoritesArray = favoritesArray.filter(item => item.id !== nanny.id);
-  } else {
-    favoritesArray.push(nanny);
+  try {
+    const transactionResult = await runTransaction(favRef, currentData => {
+      let currentFavorites = Array.isArray(currentData) ? [...currentData] : [];
+      const index = currentFavorites.findIndex(item => item.id === nanny.id);
+
+      if (index > -1) {
+        currentFavorites.splice(index, 1);
+      } else {
+        currentFavorites.push(nanny);
+      }
+      return currentFavorites;
+    });
+
+    if (transactionResult.committed) {
+      const updatedFavorites = transactionResult.snapshot.val() || [];
+      return updatedFavorites;
+    } else {
+      throw new Error('Favorite toggle transaction was aborted.');
+    }
+  } catch (error) {
+    console.error('Error toggling favorite with transaction:', error);
+    throw error;
   }
-  await set(favRef, favoritesArray);
-  return favoritesArray;
 };

@@ -1,47 +1,42 @@
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  // selectError,
   selectHasMore,
+  selectIsLoading,
   selectNannies,
 } from '../redux/nannies/selectors';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { getNannies } from '../redux/nannies/operations';
 import NanniesList from '../components/NanniesList/NanniesList';
 import Button from '../components/Button/Button';
 import Filters from '../components/Filters/Filters';
 import InfoMessages from '../components/Messages/InfoMessages/InfoMessages';
+import Loader from '../components/Loader/Loader';
 
 const NanniesPage = () => {
   const dispatch = useDispatch();
   const nannies = useSelector(selectNannies);
-  // const error = useSelector(selectError);
   const hasMore = useSelector(selectHasMore);
-  const isFetched = useRef(false);
-  console.log('nannies', nannies);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
-    if (isFetched.current) return;
-    if (nannies.length === 0) {
-      isFetched.current = true;
-
+    if (nannies.length === 0 && !isLoading) {
       dispatch(getNannies());
-      console.log('home');
     }
-  }, [dispatch, nannies]);
+  }, [dispatch, isLoading, nannies]);
 
   const loadMore = () => {
-    if (hasMore) {
+    if (hasMore && !isLoading) {
       dispatch(getNannies());
     }
   };
   return (
     <>
       <Filters />
-      {nannies.length > 0 ? (
-        <NanniesList nannies={nannies} />
-      ) : (
+      {isLoading && <Loader />}
+      {!isLoading && nannies.length === 0 && (
         <InfoMessages message="We have not nannies now" />
       )}
+      {nannies.length > 0 && <NanniesList nannies={nannies} />}
       {hasMore && nannies.length && (
         <Button type="button" variant="load-more" onClick={loadMore}>
           Load More

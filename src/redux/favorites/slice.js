@@ -1,14 +1,16 @@
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { getFavorites, toggleFavorites } from './operations';
 import getLastKey from '../../helpers/getLastKey';
+import { filterLimit } from '../../helpers/constants';
 
 const INITIAL_STATE = {
   items: [],
   isLoading: false,
   error: null,
   lastKey: null,
-  limit: 3,
+  limit: filterLimit,
   hasMore: true,
+  hasFetched: false,
   filter: 'all',
 };
 
@@ -21,6 +23,7 @@ const favoritesSlice = createSlice({
       state.items = [];
       state.lastKey = null;
       state.hasMore = true;
+      state.hasFetched = false;
     },
     clearFavState: () => INITIAL_STATE,
   },
@@ -41,17 +44,13 @@ const favoritesSlice = createSlice({
           const lastItem = payload[payload.length - 1];
           state.lastKey = getLastKey(lastItem, state);
         }
-        console.log('state.lastkey', state.lastKey);
-        // console.log('payload', payload);
+        state.hasFetched = true;
 
         state.items = [...state.items, ...payload];
-        // console.log('state.items', state.items);
       })
       .addCase(toggleFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
-        state.items = payload;
-        console.log('toggle');
-        console.log(state.items);
+        state.items = payload || [];
       })
       .addMatcher(
         isAnyOf(getFavorites.pending, toggleFavorites.pending),
