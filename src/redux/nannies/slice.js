@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { getNannies } from './operations';
 import getLastKey from '../../helpers/getLastKey';
+import { filterLimit } from '../../helpers/constants';
 
 const INITIAL_STATE = {
   items: [],
   isLoading: false,
   error: null,
   lastKey: null,
-  limit: 3,
+  limit: filterLimit,
   hasMore: true,
   filter: 'all',
 };

@@ -1,3 +1,5 @@
+export const filterLimit = 3;
+
 export const OPTIONS = [
   { value: 'a-to-z', label: 'A to Z' },
   { value: 'z-to-a', label: 'Z to A' },
