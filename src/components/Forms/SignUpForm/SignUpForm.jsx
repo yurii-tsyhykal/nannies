@@ -1,4 +1,4 @@
-import { Controller, useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import css from '../AuthForm.module.css';
 import { yupResolver } from '@hookform/resolvers/yup';
 import Button from '../../Button/Button';
@@ -9,28 +9,21 @@ import {
 } from '../../../redux/auth/selectors';
 import signUpFormSchemaOfValidation from '../../../utils/signUpFormSchemaOfValidation';
 import clsx from 'clsx';
-import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import Password from '../Password/Password';
 import { signUp } from '../../../redux/auth/operations';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import Loader from '../../Loader/Loader';
 import { clearAuthError } from '../../../redux/auth/slice';
-import Email from '../Email/Email';
 import { TOAST_MESSAGES } from '../../../helpers/constants';
+import FormField from '../FormField/FormField';
 
 const SignUpForm = ({ closeModal }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAuthIsLoading);
   const authError = useSelector(selectAuthError);
 
-  const {
-    register,
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-  } = useForm({
+  const methods = useForm({
     resolver: yupResolver(signUpFormSchemaOfValidation),
   });
 
@@ -46,7 +39,7 @@ const SignUpForm = ({ closeModal }) => {
       const result = await dispatch(signUp(data));
       if (signUp.fulfilled.match(result)) {
         toast.success(TOAST_MESSAGES.REGISTERED);
-        reset();
+        methods.reset();
         closeModal();
       }
     } catch {
@@ -54,58 +47,42 @@ const SignUpForm = ({ closeModal }) => {
     }
   };
   return (
-    <form className={css.form} onSubmit={handleSubmit(onSubmit)}>
-      <h2 className={css.formTitle}>Registration</h2>
-      <p className={css.formText}>
-        Thank you for your interest in our platform! In order to register, we
-        need some information. Please provide us with the following information.
-      </p>
-      <div className={css.errorWrapper}>
-        <input
-          className={clsx(css.name, errors.name ? css.error : '')}
-          type="text"
+    <FormProvider {...methods}>
+      <form className={css.form} onSubmit={methods.handleSubmit(onSubmit)}>
+        <h2 className={css.formTitle}>Registration</h2>
+        <p className={css.formText}>
+          Thank you for your interest in our platform! In order to register, we
+          need some information. Please provide us with the following
+          information.
+        </p>
+        <FormField
+          name="name"
           placeholder="Name"
-          {...register('name')}
+          wrapperClassName={css.errorWrapper}
+          errorClassName={css.error}
         />
-        {errors.name?.message && (
-          <ErrorMessage message={errors.name?.message} />
-        )}
-      </div>
-      <div className={css.errorWrapper}>
-        <Controller
+        <FormField
           name="email"
-          control={control}
-          render={({ field }) => (
-            <Email {...field} errorClassName={errors.email ? css.error : ''} />
-          )}
+          placeholder="Email"
+          wrapperClassName={css.errorWrapper}
+          errorClassName={css.error}
         />
-        {errors.email?.message && (
-          <ErrorMessage message={errors.email?.message} />
-        )}
-      </div>
-      <div className={clsx(css.password, css.errorWrapper)}>
-        <Controller
+        <FormField
           name="password"
-          control={control}
-          render={({ field }) => (
-            <Password
-              {...field}
-              errorClassName={errors.password ? css.error : ''}
-            />
-          )}
+          placeholder="Password"
+          component={Password}
+          wrapperClassName={clsx(css.password, css.errorWrapper)}
+          errorClassName={css.error}
         />
-        {errors.password?.message && (
-          <ErrorMessage message={errors.password?.message} />
+        {isLoading ? (
+          <Loader variant="submit" />
+        ) : (
+          <Button type="submit" variant="signUp-logIn-modals">
+            Sign Up
+          </Button>
         )}
-      </div>
-      {isLoading ? (
-        <Loader variant="submit" />
-      ) : (
-        <Button type="submit" variant="signUp-logIn-modals">
-          Sign Up
-        </Button>
-      )}
-    </form>
+      </form>
+    </FormProvider>
   );
 };
 
