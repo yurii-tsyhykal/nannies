@@ -40,6 +40,7 @@ const FormField = ({
               ...field,
               ...rest,
               id: name,
+              value: field.value ?? '',
               placeholder,
               className: clsx(inputClassName, hasError && errorClassName),
             };
