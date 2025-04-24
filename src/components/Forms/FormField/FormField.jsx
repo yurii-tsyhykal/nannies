@@ -1,0 +1,68 @@
+import clsx from 'clsx';
+import { Controller, useFormContext } from 'react-hook-form';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
+
+const FormField = ({
+  name,
+  placeholder,
+  type = 'text',
+  component = 'input',
+  rules = {},
+  wrapperClassName = '',
+  inputClassName = '',
+  errorClassName = '',
+  variant = null,
+  ...rest
+}) => {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
+  const hasError = !!errors[name];
+  const errorMessage = errors[name]?.message;
+  const InputComponent =
+    component === 'input'
+      ? 'input'
+      : component === 'textarea'
+      ? 'textarea'
+      : component;
+
+  return (
+    <>
+      <div className={wrapperClassName}>
+        <Controller
+          name={name}
+          control={control}
+          rules={rules}
+          render={({ field }) => {
+            const inputProps = {
+              ...field,
+              ...rest,
+              id: name,
+              placeholder,
+              className: clsx(inputClassName, hasError && errorClassName),
+            };
+            if (component === 'textarea') {
+              return <textarea {...inputProps} />;
+            }
+            if (typeof InputComponent !== 'string') {
+              return (
+                <InputComponent
+                  {...inputProps}
+                  errorClassName={errorClassName}
+                />
+              );
+            }
+            return <input {...inputProps} type={type} />;
+          }}
+        />
+        {errorMessage && (
+          <ErrorMessage message={errorMessage} variant={variant} />
+        )}
+      </div>
+    </>
+  );
+};
+
+export default FormField;
