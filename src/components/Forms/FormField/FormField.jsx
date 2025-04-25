@@ -7,7 +7,6 @@ const FormField = ({
   placeholder,
   type = 'text',
   component = 'input',
-  rules = {},
   wrapperClassName = '',
   inputClassName = '',
   errorClassName = '',
@@ -34,7 +33,6 @@ const FormField = ({
         <Controller
           name={name}
           control={control}
-          rules={rules}
           render={({ field }) => {
             const inputProps = {
               ...field,
