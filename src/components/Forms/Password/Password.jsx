@@ -5,7 +5,7 @@ import { forwardRef, useState } from 'react';
 const Password = forwardRef(function Password(props, ref) {
   const [isOffEye, setIsOffEye] = useState(true);
 
-  const { name, value, onChange, errorClassName, ...rest } = props;
+  const { name, value, onChange, errorClassName, error, ...rest } = props;
   const handleClick = () => setIsOffEye(!isOffEye);
   return (
     <>
@@ -13,7 +13,7 @@ const Password = forwardRef(function Password(props, ref) {
         <use href={`/images/sprite.svg#${isOffEye ? 'eye-off' : 'eye'}`}></use>
       </svg>
       <input
-        value={value || ''}
+        value={value}
         name={name}
         onChange={onChange}
         className={clsx(css.password, errorClassName)}

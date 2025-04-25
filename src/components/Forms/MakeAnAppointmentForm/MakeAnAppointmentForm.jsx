@@ -90,6 +90,7 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
 
             <FormField
               name="time"
+              placeholder="00 : 00"
               component={SingleListTimePicker}
               wrapperClassName={css.errorWrapper}
               errorClassName={css.error}

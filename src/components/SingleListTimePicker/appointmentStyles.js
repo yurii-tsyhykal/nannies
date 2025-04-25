@@ -12,12 +12,12 @@ export const appointmentStyles = {
     ...styles,
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: state.selectProps['error']
+    borderColor: state.selectProps.error
       ? 'var(--error)'
       : 'var(--input-singIn)',
     '&:is(:hover, :focus )': {
       transition: 'none',
-      borderColor: state.selectProps['error']
+      borderColor: state.selectProps.error
         ? 'var(--error)'
         : 'var(--input-singIn)',
     },

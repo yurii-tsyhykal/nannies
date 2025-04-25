@@ -63,7 +63,6 @@ const SingleListTimePicker = forwardRef(function SingleListTimePicker(
   const handleSelectChange = selectedOption => {
     onChange(selectedOption ? selectedOption.value : null);
   };
-  console.log(error);
 
   return (
     <Select
@@ -72,8 +71,8 @@ const SingleListTimePicker = forwardRef(function SingleListTimePicker(
       onChange={handleSelectChange}
       options={timeOptions}
       styles={appointmentStyles}
+      selectProps={{ error: error }}
       components={{ Control: ControlWithIcon, MenuList: MenuListWithTitle }}
-      placeholder="00 : 00"
       isSearchable={false}
       error={error}
       ref={ref}
