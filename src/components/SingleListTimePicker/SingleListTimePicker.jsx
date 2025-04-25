@@ -63,6 +63,7 @@ const SingleListTimePicker = forwardRef(function SingleListTimePicker(
   const handleSelectChange = selectedOption => {
     onChange(selectedOption ? selectedOption.value : null);
   };
+  console.log(error);
 
   return (
     <Select
