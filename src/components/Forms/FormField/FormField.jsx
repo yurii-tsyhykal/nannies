@@ -48,12 +48,7 @@ const FormField = ({
               return <textarea {...inputProps} />;
             }
             if (typeof InputComponent !== 'string') {
-              return (
-                <InputComponent
-                  {...inputProps}
-                  errorClassName={errorClassName}
-                />
-              );
+              return <InputComponent {...inputProps} error={hasError} />;
             }
             return <input {...inputProps} type={type} />;
           }}

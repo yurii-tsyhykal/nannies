@@ -12,10 +12,14 @@ export const appointmentStyles = {
     ...styles,
     borderWidth: '1px',
     borderStyle: 'solid',
-    borderColor: state.selectProps.error ? 'red' : 'var(--input-singIn)',
+    borderColor: state.selectProps['error']
+      ? 'var(--error)'
+      : 'var(--input-singIn)',
     '&:is(:hover, :focus )': {
       transition: 'none',
-      borderColor: state.selectProps.error ? 'red' : 'var(--input-singIn)',
+      borderColor: state.selectProps['error']
+        ? 'var(--error)'
+        : 'var(--input-singIn)',
     },
     boxShadow: state.isFocused && 'none',
     borderRadius: '12px',
