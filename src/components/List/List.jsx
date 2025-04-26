@@ -6,11 +6,6 @@ const List = ({
   listClassName,
   itemClassName,
 }) => {
-  const emptyMessage = 'Oops, whats wrong. We have no data';
-  if (!data || data.length === 0) {
-    return <p>{emptyMessage}</p>;
-  }
-
   const ListElement = ListWrapper;
   const ItemElement = ItemWrapper;
   return (
