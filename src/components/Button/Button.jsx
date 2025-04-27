@@ -1,22 +1,26 @@
 import clsx from 'clsx';
 import css from './Button.module.css';
 
+const variantClasses = {
+  login: css.logInBtn,
+  registration: css.registration,
+  'load-more': css.loadMore,
+  review: css.review,
+  favorites: css.favorites,
+  'signUp-logIn-modals': css.signUpLogInModals,
+  'close-modal': css.closeModal,
+  logOut: css.logOut,
+  'make-app': css.makeAppointment,
+  'send-app': css.sendAppointment,
+};
+
 const Button = ({ children, type, variant, ...rest }) => {
   return (
     <button
       type={type}
       className={clsx(
         css.button,
-        (variant === 'login' && css.logInBtn) ||
-          (variant === 'registration' && css.registration) ||
-          (variant === 'load-more' && css.loadMore) ||
-          (variant === 'review' && css.review) ||
-          (variant === 'favorites' && css.favorites) ||
-          (variant === 'signUp-logIn-modals' && css.signUpLogInModals) ||
-          (variant === 'close-modal' && css.closeModal) ||
-          (variant === 'logOut' && css.logOut) ||
-          (variant === 'make-app' && css.makeAppointment) ||
-          (variant === 'send-app' && css.sendAppointment)
+        variantClasses[variant]
       )}
       {...rest}
     >
