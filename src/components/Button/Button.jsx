@@ -18,10 +18,7 @@ const Button = ({ children, type, variant, ...rest }) => {
   return (
     <button
       type={type}
-      className={clsx(
-        css.button,
-        variantClasses[variant]
-      )}
+      className={clsx(css.button, variantClasses[variant])}
       {...rest}
     >
       {children}
