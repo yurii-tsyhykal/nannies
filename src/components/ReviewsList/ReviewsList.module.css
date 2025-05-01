@@ -1,5 +1,5 @@
 .reviewsList {
-  margin: 28px 0px 48px;
+  margin: 28px 0px 28px;
   grid-area: 4 / 2 / 5 / 4;
   color: black;
   & > li {
