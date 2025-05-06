@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getNannies } from './operations';
 import getLastKey from '../../helpers/getLastKey';
 import { filterLimit } from '../../helpers/constants';
+import { filteringArray } from '../../helpers/filteringArray';
 
 const INITIAL_STATE = {
   items: [],
@@ -47,7 +48,7 @@ const nanniesSlice = createSlice({
           state.lastKey = getLastKey(lastItem, state);
         }
 
-        state.items = [...state.items, ...payload];
+        state.items = filteringArray([...state.items, ...payload]);
       })
       .addCase(getNannies.rejected, (state, { payload }) => {
         state.isLoading = false;

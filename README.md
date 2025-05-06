@@ -9,17 +9,23 @@ favorites list, and quickly make an appointment.
 
 https://nannies-kappa.vercel.app/
 
+<img width="600" loading="lazy" src="public/images/readMe/demo-home-page.webp" />
+
 ## Features
 
 - **User Registration and Authentication:** Users can register with an Email and
   password or log in to an existing account.
-  [View authentication screenshot](#authentication)
+  [See screenshots for authentication ](#authentication)
 - **View the nannies directory:** A list of all nannies in the database is
   available with a brief description of each one.
 - **Filtering and Sorting:** Ability to filter and sort the list of nannies by
   criteria such as name (alphabetically), hourly price, and popularity (by
   rating), as well as reset filters to display all nannies.
-  [View filter screenshot](#filter)
+  [See screenshots for filter ](#filter)
+- **Pagination:** To increase performance and ease of browsing large lists, the
+  data is loaded in parts. The user can loaded the next part of nannies by
+  clicking the "**Load More**" button. This available for main nannies and
+  favorites.
 - **User Reviews:** See what other users have to say about a specific nanny
   (expands when clicked to ["Read more"](#read-more)).
 - **Favorites List:** Registered users can add nannies to their personal
@@ -53,7 +59,7 @@ https://nannies-kappa.vercel.app/
   [![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/yurii-tsyhykal/nannies/react-select?filename=package.json&style=flat&logo=react&label=React%20Select) ](https://www.npmjs.com/package/react-select/v/5.10.0)
   [![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/yurii-tsyhykal/nannies/dayjs?filename=package.json&style=flat&logo=javascript&label=Day.js) ](https://www.npmjs.com/package/dayjs/v/1.11.13)
   [![GitHub package.json prod dependency version](https://img.shields.io/github/package-json/dependency-version/yurii-tsyhykal/nannies/clsx?filename=package.json&style=flat)](https://www.npmjs.com/package/clsx/v/2.1.1)
-- **Stylization:**
+- **Styling:**
   ![Static Badge](https://img.shields.io/badge/Used-css_modules?style=flat&logo=cssmodules&label=CSS%20Modules)
 - **Deployment:**
   [![Static Badge](https://img.shields.io/badge/Used-vercel?style=flat&logo=vercel&label=Vercel&labelColor=%23000000) ](https://vercel.com/home)
@@ -88,28 +94,65 @@ or
 yarn install
 ```
 
-**3. Settings Firebase Project:**
+**3. Set Up Firebase Project:**
 
 1. Go to the [Firebase Console](https://console.firebase.google.com/u/0/).
 2. Sign in or create a Google Account.
-3. Click "Create a Firebase Project" or select an existing project.
-4. Follow the instructions to create a new Firebase project.
-5. After creating a project go to its control panel.
-6. In the left menu go to the "Build" section > select "Authentication":
+3. Click "**Create a Firebase Project**" or select an existing project.
+   - ([See the screenshots for creating project](#create-project))
+4. After creating a project go to its control panel.
+5. In the left menu go to the "**Build**" section:
 
-- Click "Get Started".
-- Go to the "Sign-in method" tab.
-- Click on "Email/Password" and enable it. Save the changes.
+   - Select "**Authentication**":
 
-7. In the left menu go to the "Build" section > select "Realtime Database":
+     - Click "**Get Started**".
+     - Go to the "**Sign-in method**" tab.
+     - Click on "**Email/Password**" and enable it. Save the changes.
+     - Go to the **"Settings"** tab > **"Password policy"**.
+     - Select **Require enforcement**.
+     - Check the boxes for: **Require uppercase character**, **Require special
+       character**, **Require lowercase character**, **Require numeric
+       character**.
+     - Set **Minimum password length** to `8`and **Maximum password length** to
+       `30`. Save changes.
+     - [See screenshots for Authentication setup](#setup-authentication)
 
-- Click "Create Database".
-- Select the database location.
-- Select "Start in **test mode**" for easy local development (this will allow
-  reading and writing data without authentication during the test period).
-- The application expects nannies in the `/nannies` collection and favorites
-  `/users/${uid}/favorites`. You will need to manually add the initial nannies
-  to `/nannies` via the database web interface.
+   - Select "**Realtime Database**":
+
+     - Click "**Create Database**".
+     - Select the database location.
+     - Select "**Start in test mode**" (for easy local development). This will
+       allow reading and writing data without authentication during the test
+       period.
+     - The application expects nannies in the `/nannies` collection and
+       favorites `/users/${uid}/favorites`. You will need to manually add the
+       initial nannies to `/nannies` via the database web interface.
+     - [See screenshots for creating Database](#create-database)
+
+6. Configure Database Security rules. Go to the **"Realtime Database"** >
+   **"Rules"** tab and replace the default code with the following code:
+
+   ```json
+   {
+     "rules": {
+       "nannies": {
+         ".indexOn": ["name", "price_per_hour", "rating"],
+         ".read": true,
+         ".write": "auth != null"
+       },
+       "users": {
+         ".read": "auth != null",
+         ".write": "auth != null",
+         "$uid": {
+           ".validate": "$uid === auth.uid",
+           "favorites": {
+             ".indexOn": ["name", "price_per_hour", "rating"]
+           }
+         }
+       }
+     }
+   }
+   ```
 
 **4. Configure Environment Variables:**
 
@@ -120,14 +163,14 @@ yarn install
 3. Fill in your Firebase configuration values in the `.env` file based on the
    structure provided in `.env.example`. You can find your configuration in
    Firebase project settings at
-   [Firebase Console](https://console.firebase.google.com/u/0/)
-   ([see the screenshots](#config-firebase)):
+   [Firebase Console](https://console.firebase.google.com/u/0/):
    - In Firebase Console in the left menu click on gear icon and go to the
-     `"Project settings"` > `"General"` tabs.
-   - Scroll down to the `"Your apps"` section.
+     **"Project settings"** > **"General"** tabs.
+   - Scroll down to the **"Your apps"** section.
    - Select and register the Web App (</> icon), if you haven't already done so.
    - Copy the configuration object that will be shown and paste the values into
      `.env`.
+   - [See screenshots for finding configuration](#config-firebase)
 
 ```dotenv
 
@@ -152,7 +195,7 @@ yarn dev
 
 ## Authors
 
-- [@octokatherine](https://www.github.com/octokatherine)
+- [@yurii-tsyhykal](https://www.github.com/yurii-tsyhykal)
 
 ## License
 
@@ -161,22 +204,44 @@ yarn dev
 ## Usage/Examples
 
 <details id='read-more'><summary>View usage screenshots for nannies profile</summary>
-<img src="public/images/readMe/profileNanny.png"/>
-<img src="public/images/readMe/profileNannyDetail.png"/>
+<img width="600" loading="lazy" src="public/images/readMe/profileNanny.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/profileNannyDetail.webp"/>
 </details>
 
 <details id='filter'><summary>View usage screenshots for filter</summary>
-<img src="public/images/readMe/filter.png"/>
+<img loading="lazy" src="public/images/readMe/filter.webp"/>
 </details>
 
-<details id='authentication'><summary>View usage screenshots for authentication</summary>
-<img src="public/images/readMe/authenticationBtn.png"/>
-<img src="public/images/readMe/signUpForm.png"/>
-<img src="public/images/readMe/logInForm.png"/>
+<details id='authentication'><summary>View usage screenshots for Authentication</summary>
+<img loading="lazy" src="public/images/readMe/authenticationBtn.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/signUpForm.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/logInForm.webp"/>
 </details>
 
 <details id='config-firebase'><summary>View usage screenshots for find configuration in your Firebase project</summary>
-<img src="public/images/readMe/step1ConfigFirebase.png"/>
-<img src="public/images/readMe/step2ConfigFirebase.png"/>
-<img src="public/images/readMe/step3ConfigFirebase.png"/>
+<img width="600" loading="lazy" src="public/images/readMe/step1ConfigFirebase.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/step2ConfigFirebase.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/step3ConfigFirebase.webp"/>
+</details>
+
+<details id='create-project'><summary>View usage screenshots for create a Firebase project</summary>
+<img width="600" loading="lazy" src="public/images/readMe/firebase-project-step1.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-project-step2.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-project-step3.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-project-step4.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-project-step5.webp" />
+</details>
+
+<details id='create-database'><summary>View usage screenshots for create a Firebase Realtime Database</summary>
+<img width="600" loading="lazy" src="public/images/readMe/firebase-realtime-database-step1.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-realtime-database-step2.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-realtime-database-step3.webp" />
+<img width="600" loading="lazy" src="public/images/readMe/firebase-realtime-database-step4.webp" />
+</details>
+
+<details id='setup-authentication'><summary>View usage screenshots for setup Firebase Authentication</summary>
+<img loading="lazy" src="public/images/readMe/firebase-setup-authentication-step1.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/firebase-setup-authentication-step2.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/firebase-setup-authentication-step3.webp"/>
+<img width="600" loading="lazy" src="public/images/readMe/firebase-setup-authentication-step4.webp"/>
 </details>
