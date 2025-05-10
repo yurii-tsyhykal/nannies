@@ -24,7 +24,7 @@ export const signIn = createAsyncThunk(
   async (userData, thunkApi) => {
     try {
       const user = await authLogInUser(userData);
-      console.log('thunk user', userData);
+
       return user;
     } catch (error) {
       const message = mapAuthErrorCodeToMessage(error);

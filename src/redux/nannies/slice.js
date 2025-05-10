@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getNannies } from './operations';
 import getLastKey from '../../helpers/getLastKey';
 import { filterLimit } from '../../helpers/constants';
-import { filteringArray } from '../../helpers/filteringArray';
 
 const INITIAL_STATE = {
   items: [],
@@ -34,21 +33,18 @@ const nanniesSlice = createSlice({
       })
       .addCase(getNannies.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.error = null;
 
-        if (state.filter === 'z-to-a' || state.filter === 'popular') {
-          payload.reverse();
-        }
-
-        if (state.filter === 'all' || payload.length < state.limit) {
-          state.hasMore = false;
-        }
+        state.items = [...state.items, ...payload];
 
         if (payload.length > 0) {
           const lastItem = payload[payload.length - 1];
           state.lastKey = getLastKey(lastItem, state);
         }
 
-        state.items = filteringArray([...state.items, ...payload]);
+        if (state.filter === 'all' || payload.length < state.limit) {
+          state.hasMore = false;
+        }
       })
       .addCase(getNannies.rejected, (state, { payload }) => {
         state.isLoading = false;

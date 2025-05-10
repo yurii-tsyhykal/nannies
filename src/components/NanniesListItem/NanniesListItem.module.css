@@ -52,30 +52,6 @@
   }
 }
 
-.info {
-  grid-area: 1 / 3 / 2 / 4;
-  display: flex;
-  justify-content: end;
-  gap: 32px;
-  font-weight: 500;
-  color: #11101c;
-  p:last-child {
-    margin-right: 48px;
-  }
-  p:not(:last-child) {
-    position: relative;
-    &::after {
-      content: '';
-      position: absolute;
-      right: -16px;
-      top: 4px;
-      width: 1px;
-      height: 16px;
-      background-color: rgba(17, 16, 28, 0.2);
-    }
-  }
-}
-
 .profileList {
   grid-area: 2 / 2 / 3 / 4;
   font-weight: 500;

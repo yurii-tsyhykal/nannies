@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectHasMore,
   selectIsLoading,
-  selectNannies,
+  selectUniqueNannies,
 } from '../redux/nannies/selectors';
 import { useEffect } from 'react';
 import { getNannies } from '../redux/nannies/operations';
@@ -14,15 +14,16 @@ import Loader from '../components/Loader/Loader';
 
 const NanniesPage = () => {
   const dispatch = useDispatch();
-  const nannies = useSelector(selectNannies);
+  const nannies = useSelector(selectUniqueNannies);
   const hasMore = useSelector(selectHasMore);
   const isLoading = useSelector(selectIsLoading);
+
 
   useEffect(() => {
     if (nannies.length === 0 && !isLoading) {
       dispatch(getNannies());
     }
-  }, [dispatch, isLoading, nannies]);
+  }, [dispatch, isLoading, nannies.length]);
 
   const loadMore = () => {
     if (hasMore && !isLoading) {

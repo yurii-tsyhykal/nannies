@@ -32,6 +32,10 @@
     font-size: 14px;
     line-height: 1.29;
     color: #11101c;
+    .star {
+      fill: var(--rating);
+      margin-right: 8px;
+    }
   }
 }
 .comment {

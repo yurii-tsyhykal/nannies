@@ -2,11 +2,10 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 import { store } from '../redux/store';
 import { clearUser, setUser } from '../redux/auth/slice';
+import { getFavorites } from '../redux/favorites/operations';
 
 export const initAuthListener = () => {
   onAuthStateChanged(auth, user => {
-    console.log(user);
-
     if (user) {
       store.dispatch(
         setUser({
@@ -14,6 +13,7 @@ export const initAuthListener = () => {
           uid: user.uid,
         })
       );
+      store.dispatch(getFavorites({ uid: user.uid }));
     } else store.dispatch(clearUser());
   });
 };

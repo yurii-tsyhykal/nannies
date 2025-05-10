@@ -19,7 +19,6 @@ export const getFavorites = createAsyncThunk(
       );
       return favorites;
     } catch (error) {
-      console.log(error.message);
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -32,7 +31,6 @@ export const toggleFavorites = createAsyncThunk(
       const updateFavorites = await toggleFavorite(uid, nanny);
       return updateFavorites;
     } catch (error) {
-      console.log(error);
       thunkApi.rejectWithValue(error.message);
     }
   }

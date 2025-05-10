@@ -1,3 +1,4 @@
+import React from 'react';
 import List from '../List/List';
 import NanniesListItem from '../NanniesListItem/NanniesListItem';
 import css from './NanniesList.module.css';
@@ -15,4 +16,4 @@ const NanniesList = ({ nannies }) => {
   );
 };
 
-export default NanniesList;
+export default React.memo(NanniesList);

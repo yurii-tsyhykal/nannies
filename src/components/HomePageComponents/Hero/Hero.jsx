@@ -1,7 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import css from './Hero.module.css';
-import { BsArrowRight } from 'react-icons/bs';
-import { FaCheck } from 'react-icons/fa';
 
 const Hero = () => {
   return (
@@ -14,17 +12,16 @@ const Hero = () => {
           </p>
           <NavLink className={css.getStartedLink} to={'/nannies'}>
             <span className={css.linkText}>Get started</span>
-            <BsArrowRight
-              className={css.arrow}
-              strokeWidth={0.5}
-              stroke="#fbfbfb"
-              fill="#fbfbfb"
-            />
+            <svg className={css.arrow} width={25} height={25}>
+              <use href="/images/sprite.svg#arrow"></use>
+            </svg>
           </NavLink>
         </div>
         <div className={css.countWrapper}>
           <span className={css.countCheck}>
-            <FaCheck className={css.checkIcon} />
+            <svg className={css.checkIcon} width={30} height={30}>
+              <use href="/images/sprite.svg#check"></use>
+            </svg>
           </span>
           <p className={css.countDesc}>Experienced nannies</p>
           <span className={css.count}>15,000</span>
