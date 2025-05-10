@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { persistor, store } from './redux/store.js';
 import { PersistGate } from 'redux-persist/integration/react';
 import Loader from './components/Loader/Loader.jsx';
-import { initAuthListener } from './services/initAuthListnener.js';
+import { initAuthListener } from './services/initAuthListener.js';
 import Modal from 'react-modal';
 
 initAuthListener();
