@@ -201,6 +201,14 @@ yarn dev
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
+## Layout
+
+[Layout](https://www.figma.com/file/u36ajEOsnwio2GDGiabVPD/Nanny-Sevices?type=design&node-id=0-1&mode=design&t=CZpMnnOCRwAYc81O-0)
+
+## Technical specification
+
+[Technical specification](https://docs.google.com/document/d/19ugM1gvOw81nCyALr4EZs3dmv6OfJm94VjupcytbnJY/edit?usp=sharing)
+
 ## Usage/Examples
 
 <details id='read-more'><summary>View usage screenshots for nannies profile</summary>
