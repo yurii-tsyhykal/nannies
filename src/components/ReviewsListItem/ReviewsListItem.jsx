@@ -1,5 +1,4 @@
 import css from './ReviewsListItem.module.css';
-import { FaStar } from 'react-icons/fa6';
 
 const ReviewsListItem = ({ reviews }) => {
   return (
@@ -8,12 +7,9 @@ const ReviewsListItem = ({ reviews }) => {
         <span className={css.avatar}>{reviews.reviewer[0]}</span>
         <h3 className={css.ReviewersName}>{reviews.reviewer}</h3>
         <span className={css.rating}>
-          <FaStar
-            fill="#ffc531"
-            width={16}
-            height={16}
-            style={{ marginRight: '8px' }}
-          />
+          <svg className={css.star} width={16} height={16}>
+            <use href={'/images/sprite.svg#star'}></use>
+          </svg>
           {reviews.rating.toFixed(1)}
         </span>
       </div>

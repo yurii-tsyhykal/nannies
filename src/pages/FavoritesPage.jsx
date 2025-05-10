@@ -4,7 +4,7 @@ import {
   selectFavHasFetched,
   selectFavHasMore,
   selectFavIsLoading,
-  selectFavNannies,
+  selectUniqueFavNannies,
 } from '../redux/favorites/selectors';
 import { getFavorites } from '../redux/favorites/operations';
 import NanniesList from '../components/NanniesList/NanniesList';
@@ -19,7 +19,7 @@ const FavoritesPage = () => {
   const { pathname } = useLocation();
   const isFavPage = pathname === '/favorites';
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavNannies);
+  const favorites = useSelector(selectUniqueFavNannies);
   const hasMore = useSelector(selectFavHasMore);
   const uid = useSelector(selectAuthUID);
   const isLoading = useSelector(selectFavIsLoading);
@@ -48,7 +48,7 @@ const FavoritesPage = () => {
       )}
 
       {favorites.length > 0 && <NanniesList nannies={favorites} />}
-      {hasMore && favorites.length && (
+      {hasMore && favorites.length > 0 && (
         <Button type="button" variant="load-more" onClick={loadMore}>
           Load More
         </Button>

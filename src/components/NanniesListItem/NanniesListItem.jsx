@@ -1,14 +1,12 @@
 import css from './NanniesListItem.module.css';
-import { FaStar } from 'react-icons/fa6';
-import { GrLocation } from 'react-icons/gr';
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Reviews from '../ReviewsList/ReviewsList';
 import Button from '../Button/Button';
-import FavoritesButton from '../FavoritesButton/FavoritesButton';
 import FormModal from '../FormModal/FormModal';
 import MakeAnAppointmentForm from '../Forms/MakeAnAppointmentForm/MakeAnAppointmentForm';
 import ageCalculate from '../../utils/ageCalc';
 import charactersToUpper from '../../utils/CharactersToUpper';
+import NannyListItemInfo from '../NannyListItemInfo/NannyListItemInfo';
 
 const NanniesListItem = ({ nanny }) => {
   const [modalContent, setModalContent] = useState(null);
@@ -17,9 +15,6 @@ const NanniesListItem = ({ nanny }) => {
   const {
     avatar_url,
     name,
-    location,
-    rating,
-    price_per_hour,
     birthday,
     experience,
     kids_age,
@@ -49,6 +44,7 @@ const NanniesListItem = ({ nanny }) => {
         <img
           className={css.avatar}
           src={avatar_url}
+          loading="lazy"
           alt="Nanny's avatar"
           width={96}
           height={96}
@@ -58,32 +54,8 @@ const NanniesListItem = ({ nanny }) => {
         <p className={css.role}>Nanny</p>
         <h2 className={css.name}>{name}</h2>
       </div>
-      <div className={css.info}>
-        <p className={css.location}>
-          <GrLocation
-            className={css.locationIcon}
-            width={16}
-            height={16}
-            strokeWidth={1.5}
-            style={{ marginRight: '8px' }}
-          />
-          {location}
-        </p>
-        <p className={css.rating}>
-          <FaStar
-            fill="#ffc531"
-            width={16}
-            height={16}
-            style={{ marginRight: '8px' }}
-          />
-          Rating: {rating}
-        </p>
-        <p>
-          Price / 1 hour:{' '}
-          <span style={{ color: '#38cd3e' }}>{price_per_hour}$</span>
-        </p>
-        <FavoritesButton nanny={nanny} />
-      </div>
+      <NannyListItemInfo nanny={nanny} />
+
       <ul className={css.profileList}>
         <li>
           Age: <span className={css.profileValue}>{age}</span>
@@ -142,4 +114,4 @@ const NanniesListItem = ({ nanny }) => {
   );
 };
 
-export default NanniesListItem;
+export default React.memo(NanniesListItem);

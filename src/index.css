@@ -3,6 +3,7 @@
   src: url('./assets/fonts/HelveticaNeueRoman.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -10,6 +11,7 @@
   src: url('./assets/fonts/HelveticaNeueMedium.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -17,6 +19,7 @@
   src: url('./assets/fonts/HelveticaNeueBold.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
+  font-display: swap;
 }
 
 *:focus {
@@ -42,6 +45,8 @@
   --transition: 250ms linear;
   --black: #11101c;
   --input-singIn: rgba(17, 16, 28, 0.1);
+  --rating: #ffc531;
+  --price: #38cd3e;
   --error: #f03f3b;
 }
 

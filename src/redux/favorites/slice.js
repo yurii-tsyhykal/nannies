@@ -32,26 +32,27 @@ const favoritesSlice = createSlice({
     builder
       .addCase(getFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
+        state.hasFetched = true;
 
-        if (state.filter === 'z-to-a' || state.filter === 'popular') {
-          payload.reverse();
-        }
-
-        if (state.filter === 'all' || payload.length < state.limit) {
-          state.hasMore = false;
-        }
+        state.items = [...state.items, ...payload];
 
         if (payload.length > 0) {
           const lastItem = payload[payload.length - 1];
           state.lastKey = getLastKey(lastItem, state);
         }
-        state.hasFetched = true;
 
-        state.items = filteringArray([...state.items, ...payload]);
+        if (
+          state.filter === 'all' ||
+          payload.length < state.limit ||
+          state.lastKey === null
+        ) {
+          state.hasMore = false;
+        }
       })
       .addCase(toggleFavorites.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.items = filteringArray(payload || []);
+        state.hasFetched = false;
       })
       .addMatcher(
         isAnyOf(getFavorites.pending, toggleFavorites.pending),
@@ -65,6 +66,7 @@ const favoritesSlice = createSlice({
         (state, { payload }) => {
           state.isLoading = false;
           state.error = payload;
+          state.hasFetched = true;
         }
       ),
 });

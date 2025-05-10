@@ -15,11 +15,11 @@ const Header = ({ type }) => {
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const openModal = content => {
-    console.log('modal is open');
+
     setModalContent(content);
   };
   const closeModal = () => {
-    console.log('modal is close');
+
     setModalContent(null);
   };
 

@@ -22,12 +22,12 @@ export const getFavoritesNannies = async (
         ...childSnapshot.val(),
       });
     });
-    if (
-      (filter === 'z-to-a' || filter === 'popular') &&
-      items.length > 0 &&
-      lastKey
-    ) {
-      data = data.filter(exists => exists.id !== lastKey.id);
+
+    if (filter === 'z-to-a' || filter === 'popular') {
+      data.reverse();
+      if (items.length > 0 && lastKey) {
+        data = data.filter(exists => exists.id !== lastKey.id);
+      }
     }
     return data;
   }
