@@ -10,8 +10,8 @@ const List = ({
   const ItemElement = ItemWrapper;
   return (
     <ListElement className={listClassName}>
-      {data.map(item => (
-        <ItemElement key={item?.id} className={itemClassName}>
+      {data.map((item, i) => (
+        <ItemElement key={item?.id ?? i} className={itemClassName}>
           {renderItem(item)}
         </ItemElement>
       ))}

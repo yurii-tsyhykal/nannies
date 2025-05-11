@@ -1,12 +1,16 @@
 import css from './NanniesListItem.module.css';
-import React, { useMemo, useState } from 'react';
+import React, { lazy, Suspense, useMemo, useState } from 'react';
 import Reviews from '../ReviewsList/ReviewsList';
 import Button from '../Button/Button';
 import FormModal from '../FormModal/FormModal';
-import MakeAnAppointmentForm from '../Forms/MakeAnAppointmentForm/MakeAnAppointmentForm';
 import ageCalculate from '../../utils/ageCalc';
 import charactersToUpper from '../../utils/CharactersToUpper';
 import NannyListItemInfo from '../NannyListItemInfo/NannyListItemInfo';
+import Loader from '../Loader/Loader';
+
+const MakeAnAppointmentForm = lazy(() =>
+  import('../Forms/MakeAnAppointmentForm/MakeAnAppointmentForm')
+);
 
 const NanniesListItem = ({ nanny }) => {
   const [modalContent, setModalContent] = useState(null);
@@ -105,7 +109,7 @@ const NanniesListItem = ({ nanny }) => {
               closeModal={closeModal}
               variant="appointment"
             >
-              {modalContent}
+              <Suspense fallback={<Loader />}>{modalContent}</Suspense>
             </FormModal>
           )}
         </>

@@ -2,24 +2,24 @@ import { Link, NavLink } from 'react-router-dom';
 import css from './Header.module.css';
 import Button from '../Button/Button';
 import clsx from 'clsx';
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import FormModal from '../FormModal/FormModal';
-import SignUpForm from '../Forms/SignUpForm/SignUpForm';
-import LogInForm from '../Forms/LogInForm/LogInForm';
 import { useSelector } from 'react-redux';
 import { selectIsAuthenticated } from '../../redux/auth/selectors';
 import UserMenu from '../UserMenu/UserMenu';
+import Loader from '../Loader/Loader';
+
+const SignUpForm = lazy(() => import('../Forms/SignUpForm/SignUpForm'));
+const LogInForm = lazy(() => import('../Forms/LogInForm/LogInForm'));
 
 const Header = ({ type }) => {
   const [modalContent, setModalContent] = useState(null);
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const openModal = content => {
-
     setModalContent(content);
   };
   const closeModal = () => {
-
     setModalContent(null);
   };
 
@@ -85,7 +85,7 @@ const Header = ({ type }) => {
               </Button>
               {modalContent && (
                 <FormModal modalIsOpen={!!modalContent} closeModal={closeModal}>
-                  {modalContent}
+                  <Suspense fallback={<Loader />}>{modalContent}</Suspense>
                 </FormModal>
               )}
             </div>
