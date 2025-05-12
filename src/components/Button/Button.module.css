@@ -48,7 +48,7 @@
 }
 
 .favorites {
-  margin-left: 16px;
+  grid-area: 1 / 4 / 2 / 5;
   width: 26px;
   height: 26px;
 }
