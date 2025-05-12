@@ -3,7 +3,7 @@
   .listItem {
     border-radius: 24px;
     background-color: var(--main);
-    padding: 24px;
+    padding: 24px 24px 4px 24px;
     display: grid;
     grid-template-columns: 144px 350px 1fr;
     grid-template-rows: auto auto auto auto auto;
