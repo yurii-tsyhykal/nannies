@@ -20,13 +20,22 @@ const FavoritesButton = ({ nanny }) => {
     selectIsNannyFavorite(state, nanny.id)
   );
 
+  const ariaLabel = isFavorite
+    ? 'Remove this nanny from favorites'
+    : 'Add this nanny to favorites';
+
   const handleClick = () => {
     if (!uid || !isAuthenticated) return toast.warn(TOAST_MESSAGES.FAV_BUTTON);
     dispatch(toggleFavorites({ uid, nanny }));
   };
   return (
     <>
-      <Button type="button" variant="favorites" onClick={handleClick}>
+      <Button
+        aria-label={ariaLabel}
+        type="button"
+        variant="favorites"
+        onClick={handleClick}
+      >
         <svg
           width={26}
           height={26}
