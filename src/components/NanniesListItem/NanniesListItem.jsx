@@ -1,6 +1,5 @@
 import css from './NanniesListItem.module.css';
 import React, { lazy, Suspense, useMemo, useState } from 'react';
-import Reviews from '../ReviewsList/ReviewsList';
 import Button from '../Button/Button';
 import FormModal from '../FormModal/FormModal';
 import ageCalculate from '../../utils/ageCalc';
@@ -11,6 +10,8 @@ import Loader from '../Loader/Loader';
 const MakeAnAppointmentForm = lazy(() =>
   import('../Forms/MakeAnAppointmentForm/MakeAnAppointmentForm')
 );
+
+const Reviews = lazy(() => import('../ReviewsList/ReviewsList'));
 
 const NanniesListItem = ({ nanny }) => {
   const [modalContent, setModalContent] = useState(null);
