@@ -76,6 +76,7 @@ const SingleListTimePicker = forwardRef(function SingleListTimePicker(
       isSearchable={false}
       error={error}
       ref={ref}
+      aria-label="Choose a meeting time"
       {...rest}
     />
   );
