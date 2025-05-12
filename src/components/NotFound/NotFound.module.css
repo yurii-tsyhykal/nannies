@@ -1,0 +1,20 @@
+.NotFoundWrapper {
+  color: var(--black);
+  line-height: 1;
+  font-size: 28px;
+  font-weight: 400;
+  .notFoundTitle {
+    font-size: 44px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .notFoundDesc {
+    margin-bottom: 8px;
+  }
+
+  .notFoundBack {
+    font-size: 24px;
+    color: var(--background);
+  }
+}
