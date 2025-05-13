@@ -38,7 +38,6 @@
     }
   }
   .scrollWrapper {
-    overflow: auto;
     margin-bottom: 24px;
 
     .inputWrapper {
