@@ -10,12 +10,26 @@ const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
       borderRadius: '30px',
       padding: 0,
       maxWidth: variant === 'appointment' ? '600px' : '566px',
+      MaxHeight: variant === 'appointment' ? '908px' : '',
       top: '50%',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      '&::WebkitScrollbar': {
+        width: '8px',
+      },
+
+      '&::WebkitScrollbarTrack': {
+        background: 'transparent',
+        borderRadius: '4px',
+      },
+
+      '&::WebkitScrollbarThumb': {
+        background: 'rgba(40, 39, 39, 0.6)',
+        borderRadius: '4px',
+      },
     },
     overlay: {
       zIndex: '99',
