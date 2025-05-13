@@ -68,6 +68,20 @@ a {
 
 body {
   margin: 0;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(40, 39, 39, 0.6);
+    border-radius: 4px;
+  }
 }
 
 h1,
