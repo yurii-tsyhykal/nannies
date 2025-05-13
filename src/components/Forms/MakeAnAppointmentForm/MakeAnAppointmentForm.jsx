@@ -115,6 +115,7 @@ const MakeAnAppointmentForm = ({ closeModal, nanny }) => {
             component="textarea"
             wrapperClassName={clsx(css.errorWrapper, css.commentWrapper)}
             errorClassName={css.textareaError}
+            rows="4"
           />
         </div>
         {isSubmitting ? (

@@ -7,7 +7,7 @@
   flex-wrap: wrap;
   column-gap: 14px;
   max-height: 44px;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
   .nannyAvatar {
     border-radius: 15px;
   }
@@ -29,8 +29,7 @@
 
 .form.formAp {
   max-width: 600px;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-right: 58px;
 
   input {
     max-width: 472px;
@@ -39,33 +38,18 @@
     }
   }
   .scrollWrapper {
-    max-height: 350px;
     overflow: auto;
-    padding-right: 5px;
-    margin-bottom: 36px;
+    margin-bottom: 24px;
 
-    &::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: transparent;
-      border-radius: 4px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background: rgba(40, 39, 39, 0.6);
-      border-radius: 4px;
-    }
     .inputWrapper {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
-      column-gap: 8px;
       row-gap: 16px;
       margin-bottom: 16px;
       input {
         min-width: 232px;
+        max-width: 232px;
         width: 100%;
         margin-bottom: 0;
       }
@@ -90,7 +74,7 @@
         width: 100%;
         border-color: var(--input-singIn);
         border-radius: 12px;
-        padding: 16px 18px;
+        padding: 17px 18px;
         font-size: inherit;
         line-height: 1.25;
         background-color: transparent;

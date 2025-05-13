@@ -38,6 +38,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-gutter: stable;
 
   --font-family: 'Helvetica Neue', sans-serif;
   --main: #fbfbfb;
