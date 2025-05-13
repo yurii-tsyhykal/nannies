@@ -43,6 +43,20 @@
     overflow: auto;
     padding-right: 5px;
     margin-bottom: 36px;
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(40, 39, 39, 0.6);
+      border-radius: 4px;
+    }
     .inputWrapper {
       display: flex;
       flex-wrap: wrap;
@@ -79,6 +93,7 @@
         padding: 16px 18px;
         font-size: inherit;
         line-height: 1.25;
+        background-color: transparent;
         &::placeholder {
           color: inherit;
         }
