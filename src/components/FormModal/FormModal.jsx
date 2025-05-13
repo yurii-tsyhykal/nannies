@@ -11,11 +11,9 @@ const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
       padding: 0,
       maxWidth: variant === 'appointment' ? '600px' : '566px',
       MaxHeight: variant === 'appointment' ? '908px' : '',
-      top: '50%',
+      top: variant === 'appointment' ? '69%' : '50%',
       left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
+      marginBottom: variant === 'appointment' ? '50px' : 'none',
       transform: 'translate(-50%, -50%)',
       '&::WebkitScrollbar': {
         width: '8px',
@@ -33,6 +31,7 @@ const FormModal = ({ modalIsOpen, closeModal, children, variant = null }) => {
     },
     overlay: {
       zIndex: '99',
+      overflowY: 'auto',
       backgroundColor: 'rgba(11, 11, 11, 0.6)',
     },
   };
